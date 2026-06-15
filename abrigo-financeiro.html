@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abrigo Financeiro</title>
+<style>
+  :root {
+    --sage:#4a7c6f;--sage-light:#e8f0ee;--sage-mid:#b8d4ce;--sage-dark:#2d5048;
+    --cream:#faf8f5;--stone-light:#f0ede8;--text:#1a1a18;--text-2:#5a5854;--text-3:#9a9794;
+    --border:rgba(0,0,0,0.08);--border-mid:rgba(0,0,0,0.13);--white:#ffffff;
+    --danger:#c94f3a;--warn:#b07d2a;--warn-bg:#fdf5e6;--success:#3a7a5c;--success-bg:#eaf4ee;
+    --r:14px;--r-sm:8px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh;}
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+  .nav-logo{font-size:15px;font-weight:600;color:var(--sage-dark);letter-spacing:-.3px;}
+  .nav-logo span{color:var(--sage);}
+  .nav-tabs{display:flex;gap:2px;background:var(--stone-light);border-radius:var(--r-sm);padding:3px;}
+  .nav-tab{padding:5px 10px;border-radius:6px;font-size:11px;font-weight:500;color:var(--text-2);cursor:pointer;border:none;background:transparent;transition:all .15s;}
+  .nav-tab.active{background:var(--white);color:var(--sage-dark);box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+  .screen{display:none;padding:16px;max-width:680px;margin:0 auto;}
+  .screen.active{display:block;}
+  .card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:16px;margin-bottom:10px;}
+  .card-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:12px;}
+  .metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+  .metric{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;}
+  .metric-label{font-size:11px;color:var(--text-3);margin-bottom:3px;font-weight:500;}
+  .metric-value{font-size:19px;font-weight:600;color:var(--text);letter-spacing:-.5px;}
+  .metric-value.positive{color:var(--success);}
+  .metric-value.negative{color:var(--danger);}
+  .metric-sub{font-size:11px;color:var(--text-3);margin-top:2px;}
+  .abrigo{background:linear-gradient(135deg,var(--sage-dark) 0%,var(--sage) 100%);border-radius:var(--r);padding:18px;margin-bottom:10px;color:white;}
+  .abrigo-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;opacity:.75;margin-bottom:6px;}
+  .abrigo-values{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px;}
+  .abrigo-current{font-size:26px;font-weight:700;letter-spacing:-.8px;}
+  .abrigo-meta{font-size:12px;opacity:.75;text-align:right;}
+  .abrigo-meta span{display:block;font-size:17px;font-weight:600;opacity:1;}
+  .progress-bar{height:5px;background:rgba(255,255,255,0.25);border-radius:3px;overflow:hidden;}
+  .progress-fill{height:100%;background:white;border-radius:3px;transition:width .6s ease;}
+  .progress-pct{font-size:11px;opacity:.8;margin-top:5px;}
+  .ciclo-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:10px;}
+  .ciclo-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+  .ciclo-titulo{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);}
+  .ciclo-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;}
+  .ciclo-badge.aberto{background:var(--success-bg);color:var(--success);}
+  .ciclo-badge.fechando{background:var(--warn-bg);color:var(--warn);}
+  .ciclo-datas{font-size:12px;color:var(--text-2);margin-bottom:10px;}
+  .ciclo-datas strong{color:var(--text);}
+  .dias-bar-bg{height:4px;background:var(--stone-light);border-radius:2px;}
+  .dias-bar-fill{height:4px;border-radius:2px;background:var(--sage);transition:width .5s;}
+  .dias-label{display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);margin-top:3px;}
+  .ciclo-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);}
+  .ciclo-row:last-child{border-bottom:none;padding-bottom:0;}
+  .ciclo-key{font-size:12px;color:var(--text-2);}
+  .ciclo-val{font-size:14px;font-weight:600;}
+  .ciclo-val.warn{color:var(--warn);}
+  .ciclo-val.ok{color:var(--success);}
+  .itf-row{display:flex;align-items:center;gap:14px;}
+  .itf-circle{width:60px;height:60px;flex-shrink:0;}
+  .itf-score{font-size:26px;font-weight:700;letter-spacing:-.5px;}
+  .itf-name{font-size:13px;color:var(--text-2);margin-top:2px;}
+  .itf-bar-bg{height:4px;background:var(--stone-light);border-radius:2px;margin-top:8px;}
+  .itf-bar-fill{height:4px;border-radius:2px;transition:width .6s ease;}
+  .analise{background:var(--sage-light);border:1px solid var(--sage-mid);border-radius:var(--r);padding:14px;margin-bottom:10px;}
+  .analise-icon{font-size:16px;margin-bottom:6px;}
+  .analise-text{font-size:13px;color:var(--sage-dark);line-height:1.65;}
+  .chart-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
+  .chart-label{font-size:11px;color:var(--text-3);width:52px;text-align:right;flex-shrink:0;}
+  .chart-bar-bg{flex:1;height:22px;background:var(--stone-light);border-radius:4px;overflow:hidden;}
+  .chart-bar{height:100%;border-radius:4px;min-width:4px;transition:width .5s ease;}
+  .chart-val{font-size:11px;color:var(--text-2);width:76px;text-align:right;flex-shrink:0;}
+  .proj-mes{background:var(--white);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden;}
+  .proj-mes-header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;}
+  .proj-mes-header:hover{background:var(--stone-light);}
+  .proj-mes-titulo{font-size:14px;font-weight:600;color:var(--text);}
+  .proj-mes-sub{font-size:11px;color:var(--text-3);margin-top:2px;}
+  .proj-mes-saldo-val{font-size:16px;font-weight:700;text-align:right;}
+  .proj-mes-saldo-label{font-size:10px;color:var(--text-3);text-align:right;}
+  .proj-mes-body{border-top:1px solid var(--border);padding:12px 16px;display:none;}
+  .proj-mes-body.open{display:block;}
+  .proj-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;}
+  .proj-row:last-child{border-bottom:none;}
+  .proj-row-label{color:var(--text-2);}
+  .proj-row-val{font-weight:600;}
+  .proj-row-val.neg{color:var(--danger);}
+  .proj-row-val.pos{color:var(--success);}
+  .proj-row-val.warn{color:var(--warn);}
+  .proj-poupanca-bar{margin-top:8px;}
+  .proj-poupanca-bg{height:6px;background:var(--stone-light);border-radius:3px;margin-top:4px;}
+  .proj-poupanca-fill{height:6px;border-radius:3px;transition:width .5s;}
+  .proj-poupanca-label{display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);margin-top:3px;}
+  .badge-ok{background:var(--success-bg);color:var(--success);font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;}
+  .badge-warn{background:var(--warn-bg);color:var(--warn);font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;}
+  .badge-no{background:#fdf0ee;color:var(--danger);font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;}
+  .fixo-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);}
+  .fixo-item:last-child{border-bottom:none;}
+  .fixo-icon{font-size:18px;width:28px;text-align:center;flex-shrink:0;}
+  .fixo-nome{font-size:13px;font-weight:500;color:var(--text);}
+  .fixo-val{font-size:12px;color:var(--text-3);}
+  .fixo-del{background:none;border:none;cursor:pointer;color:var(--text-3);font-size:16px;padding:4px;border-radius:6px;}
+  .fixo-del:hover{color:var(--danger);background:#fdf0ee;}
+  .add-fixo-form{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+  .add-fixo-form input{flex:1;min-width:100px;border:1px solid var(--border-mid);border-radius:var(--r-sm);padding:8px 10px;font-size:13px;outline:none;}
+  .add-fixo-form input:focus{border-color:var(--sage);}
+  .add-fixo-form select{border:1px solid var(--border-mid);border-radius:var(--r-sm);padding:8px 10px;font-size:13px;outline:none;background:var(--white);color:var(--text);}
+  .btn-add{background:var(--sage-dark);color:white;border:none;border-radius:var(--r-sm);padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;}
+  .btn-add:hover{background:var(--sage);}
+  .checkin-step{display:none;}
+  .checkin-step.active{display:block;}
+  .step-header{text-align:center;padding:8px 0 18px;}
+  .step-num{font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;}
+  .step-title{font-size:19px;font-weight:700;color:var(--text);margin-top:4px;letter-spacing:-.3px;}
+  .step-sub{font-size:13px;color:var(--text-2);margin-top:4px;}
+  .step-dots{display:flex;justify-content:center;gap:6px;margin-bottom:18px;}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--stone-light);}
+  .dot.active{background:var(--sage);}
+  .dot.done{background:var(--sage-mid);}
+  .field{margin-bottom:12px;}
+  .field label{font-size:12px;font-weight:600;color:var(--text-2);display:block;margin-bottom:5px;}
+  .field input{width:100%;border:1px solid var(--border-mid);border-radius:var(--r-sm);padding:10px 12px;font-size:15px;color:var(--text);background:var(--white);outline:none;transition:border-color .15s;}
+  .field input:focus{border-color:var(--sage);}
+  .field-hint{font-size:11px;color:var(--text-3);margin-top:4px;}
+  .field-hint.destaque{color:var(--sage-dark);font-weight:500;background:var(--sage-light);padding:5px 8px;border-radius:6px;margin-top:6px;}
+  .ciclo-info-box{background:var(--stone-light);border-radius:var(--r-sm);padding:9px 12px;margin-bottom:12px;font-size:12px;color:var(--text-2);line-height:1.6;}
+  .ciclo-info-box strong{color:var(--text);font-weight:600;}
+  .cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px;}
+  .cat-item{border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 10px;display:flex;gap:8px;align-items:center;background:var(--white);}
+  .cat-icon{font-size:15px;}
+  .cat-name{font-size:12px;font-weight:600;color:var(--text);}
+  .cat-val{font-size:11px;color:var(--text-3);}
+  .cat-input{width:76px;border:1px solid var(--border-mid);border-radius:6px;padding:4px 7px;font-size:13px;text-align:right;outline:none;}
+  .cat-input:focus{border-color:var(--sage);}
+  .emoji-row{display:flex;justify-content:center;gap:24px;margin:18px 0;}
+  .emoji-btn{width:60px;height:60px;border-radius:50%;border:2px solid var(--border);background:var(--white);font-size:26px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;}
+  .emoji-btn:hover{transform:scale(1.1);border-color:var(--sage-mid);}
+  .emoji-btn.selected{border-color:var(--sage);background:var(--sage-light);transform:scale(1.1);}
+  .btn{width:100%;padding:12px;border-radius:var(--r-sm);font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .15s;}
+  .btn-primary{background:var(--sage-dark);color:white;}
+  .btn-primary:hover{background:var(--sage);}
+  .btn-secondary{background:var(--stone-light);color:var(--text-2);margin-top:8px;}
+  .hist-item{padding:12px 0;border-bottom:1px solid var(--border);}
+  .hist-item:last-child{border-bottom:none;}
+  .hist-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+  .hist-semana{font-size:12px;font-weight:600;color:var(--text);}
+  .hist-ciclo{font-size:10px;color:var(--text-3);background:var(--stone-light);padding:2px 7px;border-radius:99px;}
+  .hist-values{display:flex;gap:12px;flex-wrap:wrap;}
+  .hist-val{font-size:12px;color:var(--text-2);}
+  .hist-val strong{font-weight:600;color:var(--text);display:block;font-size:13px;}
+  .renda-ref-box{background:var(--sage-light);border:1px solid var(--sage-mid);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:12px;font-size:12px;color:var(--sage-dark);line-height:1.6;}
+  .renda-ref-box strong{font-weight:600;}
+  .section-divider{height:1px;background:var(--border);margin:4px 0 10px;}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--sage-dark);color:white;padding:10px 20px;border-radius:99px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;white-space:nowrap;}
+  .toast.show{opacity:1;}
+  .empty{text-align:center;padding:28px 20px;color:var(--text-3);}
+  .empty-icon{font-size:28px;margin-bottom:8px;}
+  .empty-text{font-size:13px;line-height:1.6;}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-logo">abrigo<span>.</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="goTo('dashboard')">Início</button>
+    <button class="nav-tab" onclick="goTo('checkin')">Check-in</button>
+    <button class="nav-tab" onclick="goTo('projecao')">Projeção</button>
+    <button class="nav-tab" onclick="goTo('historico')">Histórico</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="screen-dashboard" class="screen active">
+  <div class="abrigo">
+    <div class="abrigo-label">🏡 Abrigo financeiro</div>
+    <div class="abrigo-values">
+      <div class="abrigo-current" id="abrigo-current">R$ 0</div>
+      <div class="abrigo-meta">meta<span>R$ 36.000</span></div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="abrigo-bar" style="width:0%"></div></div>
+    <div class="progress-pct" id="abrigo-pct">0% — comece com qualquer valor</div>
+  </div>
+  <div id="analise-card" class="analise">
+    <div class="analise-icon">🌱</div>
+    <div class="analise-text" id="analise-text">Bem-vinda ao seu abrigo. Faça seu primeiro check-in para começar.</div>
+  </div>
+  <div class="ciclo-card">
+    <div class="ciclo-header">
+      <div class="ciclo-titulo">Ciclo de fatura atual</div>
+      <div class="ciclo-badge aberto" id="ciclo-badge">Aberto</div>
+    </div>
+    <div class="ciclo-datas" id="ciclo-datas"></div>
+    <div class="dias-bar-bg"><div class="dias-bar-fill" id="ciclo-progresso-bar" style="width:0%"></div></div>
+    <div class="dias-label"><span id="ciclo-dias-ini"></span><span>Fecha dia 13</span></div>
+    <div class="section-divider" style="margin-top:8px"></div>
+    <div class="ciclo-row"><span class="ciclo-key">Fatura acumulada</span><span class="ciclo-val" id="ciclo-fatura-acum">—</span></div>
+    <div class="ciclo-row"><span class="ciclo-key">Dias até fechar</span><span class="ciclo-val" id="ciclo-dias-rest">—</span></div>
+    <div class="ciclo-row"><span class="ciclo-key">Pagamento</span><span class="ciclo-val" id="ciclo-pgto">—</span></div>
+  </div>
+  <div class="metric-grid">
+    <div class="metric"><div class="metric-label">Entrou este mês</div><div class="metric-value positive" id="m-entrou">R$ —</div><div class="metric-sub" id="m-entrou-sub">nenhum registro</div></div>
+    <div class="metric"><div class="metric-label">Total gasto</div><div class="metric-value" id="m-saiu">R$ —</div><div class="metric-sub" id="m-saiu-sub">nenhum registro</div></div>
+    <div class="metric"><div class="metric-label">Poupado</div><div class="metric-value positive" id="m-econ">R$ —</div><div class="metric-sub" id="m-econ-sub">meta: 20%</div></div>
+    <div class="metric"><div class="metric-label">Saldo disponível</div><div class="metric-value" id="m-saldo">R$ —</div><div class="metric-sub" id="m-saldo-sub">entrou − saiu</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Índice de Tranquilidade Financeira</div>
+    <div class="itf-row">
+      <svg class="itf-circle" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="26" fill="none" stroke="#e8f0ee" stroke-width="6"/>
+        <circle cx="32" cy="32" r="26" fill="none" stroke="#4a7c6f" stroke-width="6" stroke-dasharray="163.4" id="itf-arc" stroke-dashoffset="163.4" stroke-linecap="round" transform="rotate(-90 32 32)" style="transition:stroke-dashoffset .8s ease"/>
+        <text x="32" y="36" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a18" id="itf-num">—</text>
+      </svg>
+      <div style="flex:1">
+        <div class="itf-score" id="itf-score-label">Sem dados</div>
+        <div class="itf-name" id="itf-level">Faça seu primeiro check-in</div>
+        <div class="itf-bar-bg"><div class="itf-bar-fill" id="itf-bar" style="width:0%;background:var(--sage)"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Fatura por ciclo</div>
+    <div id="chart-fatura"><div class="empty" style="padding:14px 0"><div class="empty-text" style="font-size:12px">Aparecerá após check-ins com fatura</div></div></div>
+  </div>
+</div>
+
+<!-- CHECK-IN -->
+<div id="screen-checkin" class="screen">
+  <div class="step-dots" id="step-dots"></div>
+  <div class="checkin-step active" id="step-1">
+    <div class="step-header"><div class="step-num">Passo 1 de 4</div><div class="step-title">O que entrou?</div><div class="step-sub">Salário, freelas — tudo que chegou esta semana.</div></div>
+    <div class="card">
+      <div class="field"><label>Valor que entrou (R$)</label><input type="number" id="ci-renda" placeholder="0,00" min="0" step="0.01"></div>
+      <div class="field"><label>Valor poupado / investido (R$)</label><input type="number" id="ci-poupado" placeholder="0,00" min="0" step="0.01"><div class="field-hint destaque" id="poupado-hint">Meta: 20% da renda. Preencha o valor acima.</div></div>
+      <div class="field"><label>Adicionou ao abrigo? (R$)</label><input type="number" id="ci-abrigo" placeholder="0,00" min="0" step="0.01"><div class="field-hint">Valor acrescentado à reserva de R$36.000.</div></div>
+    </div>
+    <button class="btn btn-primary" onclick="nextStep(2)">Continuar →</button>
+  </div>
+  <div class="checkin-step" id="step-2">
+    <div class="step-header"><div class="step-num">Passo 2 de 4</div><div class="step-title">O que saiu?</div><div class="step-sub">Categoria é opcional — preencha só o que lembrar.</div></div>
+    <div class="card">
+      <div class="ciclo-info-box" id="checkin-ciclo-info"></div>
+      <div class="field"><label>Total gasto esta semana (R$)</label><input type="number" id="ci-total-gasto" placeholder="0,00" min="0" step="0.01"></div>
+      <div class="field"><label>Fatura acumulada no ciclo (R$)</label><input type="number" id="ci-fatura" placeholder="0,00" min="0" step="0.01"><div class="field-hint" id="fatura-hint"></div></div>
+    </div>
+    <div class="card"><div class="card-title">Categorias (opcional)</div><div class="cat-grid" id="cat-grid"></div></div>
+    <button class="btn btn-primary" onclick="nextStep(3)">Continuar →</button>
+    <button class="btn btn-secondary" onclick="nextStep(3)">Pular categorias</button>
+  </div>
+  <div class="checkin-step" id="step-3">
+    <div class="step-header"><div class="step-num">Passo 3 de 4</div><div class="step-title">Como você se sentiu?</div><div class="step-sub">Com relação ao seu dinheiro esta semana.</div></div>
+    <div class="card">
+      <div class="emoji-row">
+        <button class="emoji-btn" onclick="selectEmoji('😟')" id="emoji-ansioso">😟</button>
+        <button class="emoji-btn" onclick="selectEmoji('😐')" id="emoji-neutro">😐</button>
+        <button class="emoji-btn" onclick="selectEmoji('😊')" id="emoji-bem">😊</button>
+      </div>
+      <div style="text-align:center;font-size:12px;color:var(--text-3)">Ansiedade · Neutro · Tranquilidade</div>
+    </div>
+    <button class="btn btn-primary" onclick="nextStep(4)">Continuar →</button>
+  </div>
+  <div class="checkin-step" id="step-4">
+    <div class="step-header"><div class="step-num">Passo 4 de 4</div><div class="step-title">Tudo certo?</div><div class="step-sub">Revise antes de salvar.</div></div>
+    <div class="card" id="revisao-card"></div>
+    <button class="btn btn-primary" onclick="salvarCheckin()">Salvar check-in ✓</button>
+    <button class="btn btn-secondary" onclick="nextStep(1)">Editar</button>
+  </div>
+</div>
+
+<!-- PROJEÇÃO -->
+<div id="screen-projecao" class="screen">
+  <div class="card">
+    <div class="card-title">Renda mensal de referência</div>
+    <div class="renda-ref-box" id="renda-ref-box">Defina sua renda mensal para calcular a projeção de poupança.</div>
+    <div class="field" style="margin-bottom:0"><label>Renda mensal esperada (R$)</label><input type="number" id="proj-renda-ref" placeholder="Ex: 10000" min="0" step="100" oninput="salvarRendaRef(this.value)"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Gastos fixos mensais</div>
+    <div id="fixos-lista"><div class="empty" style="padding:12px 0"><div class="empty-text" style="font-size:12px">Nenhum fixo cadastrado ainda.</div></div></div>
+    <div class="section-divider"></div>
+    <div style="font-size:12px;font-weight:600;color:var(--text-2);margin-bottom:8px">Adicionar gasto fixo</div>
+    <div class="add-fixo-form">
+      <select id="fixo-icon-sel">
+        <option value="🏠">🏠 Aluguel</option>
+        <option value="⚡">⚡ Luz/Água</option>
+        <option value="📱">📱 Celular</option>
+        <option value="🌐">🌐 Internet</option>
+        <option value="🏥">🏥 Plano de saúde</option>
+        <option value="🎓">🎓 Educação</option>
+        <option value="🚗">🚗 Carro/seguro</option>
+        <option value="🐾">🐾 Petshop fixo</option>
+        <option value="💳">💳 Assinatura</option>
+        <option value="📦">📦 Outro</option>
+      </select>
+      <input type="text" id="fixo-nome" placeholder="Nome do gasto" style="flex:2">
+      <input type="number" id="fixo-valor" placeholder="R$" min="0" step="10" style="width:90px;flex:none">
+      <button class="btn-add" onclick="adicionarFixo()">+ Adicionar</button>
+    </div>
+    <div style="margin-top:10px;font-size:12px;color:var(--text-3)">Total fixos: <strong id="total-fixos" style="color:var(--text)">R$ 0</strong></div>
+  </div>
+  <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:10px">Projeção — próximos 3 ciclos</div>
+  <div id="proj-ciclos"></div>
+  <div class="card" style="margin-top:4px">
+    <div class="card-title">Ajustar estimativa de fatura</div>
+    <div style="font-size:12px;color:var(--text-2);margin-bottom:10px;line-height:1.6">Base: média dos ciclos registrados. Ajuste se souber de gastos maiores previstos.</div>
+    <div id="ajuste-faturas"></div>
+  </div>
+</div>
+
+<!-- HISTÓRICO -->
+<div id="screen-historico" class="screen">
+  <div class="card">
+    <div class="card-title">Check-ins registrados</div>
+    <div id="historico-list"><div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Nenhum check-in ainda.</div></div></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const ABRIGO_META=36000;
+const CATS=[
+  {id:'cartao',name:'Cartão',icon:'💳'},{id:'assinaturas',name:'Assinaturas',icon:'📱'},
+  {id:'mercado',name:'Mercado',icon:'🛒'},{id:'delivery',name:'Delivery',icon:'🛵'},
+  {id:'petshop',name:'Petshop',icon:'🐾'},{id:'farmacia',name:'Farmácia',icon:'💊'},
+  {id:'comer_fora',name:'Comer fora',icon:'🍽️'},{id:'transporte',name:'Transporte',icon:'🚌'},
+  {id:'contas',name:'Contas',icon:'📄'},{id:'compras',name:'Compras',icon:'🛍️'},
+];
+let state=JSON.parse(localStorage.getItem('abrigo_v3')||JSON.stringify({abrigo:0,checkins:[],fixos:[],rendaRef:0,ajustesFatura:{}}));
+if(!state.fixos)state.fixos=[];
+if(!state.ajustesFatura)state.ajustesFatura={};
+if(!state.rendaRef)state.rendaRef=0;
+let currentEmoji='',currentStep=1;
+function save(){localStorage.setItem('abrigo_v3',JSON.stringify(state));}
+
+function getCiclo(ref){
+  const d=ref||new Date(),dia=d.getDate(),mes=d.getMonth(),ano=d.getFullYear();
+  let iM,iA,fM,fA;
+  if(dia<=13){iM=mes-1<0?11:mes-1;iA=mes-1<0?ano-1:ano;fM=mes;fA=ano;}
+  else{iM=mes;iA=ano;fM=mes+1>11?0:mes+1;fA=mes+1>11?ano+1:ano;}
+  const abertura=new Date(iA,iM,14),fechamento=new Date(fA,fM,13),pagamento=new Date(fA,fM,15);
+  const total=Math.round((fechamento-abertura)/86400000)+1;
+  const passados=Math.round((d-abertura)/86400000);
+  const restantes=Math.round((fechamento-d)/86400000);
+  return{abertura,fechamento,pagamento,total,passados,restantes};
+}
+
+function proximosCiclos(n){
+  const ciclos=[];let ref=new Date();
+  for(let i=0;i<n;i++){const c=getCiclo(ref);ciclos.push(c);ref=new Date(c.fechamento.getFullYear(),c.fechamento.getMonth(),14);}
+  return ciclos;
+}
+
+function fmtD(d){return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});}
+function fmtDC(d){return`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;}
+function cicloKey(c){return`${c.fechamento.getFullYear()}-${String(c.fechamento.getMonth()+1).padStart(2,'0')}`;}
+function cicloLabel(c){return`${fmtDC(c.abertura)} → ${fmtDC(c.fechamento)}`;}
+function fmt(v){return'R$ '+Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});}
+
+function goTo(s){
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(x=>x.classList.remove('active'));
+  document.getElementById('screen-'+s).classList.add('active');
+  ['dashboard','checkin','projecao','historico'].forEach((x,i)=>{if(x===s)document.querySelectorAll('.nav-tab')[i].classList.add('active');});
+  if(s==='dashboard')renderDashboard();
+  if(s==='historico')renderHistorico();
+  if(s==='checkin')initCheckin();
+  if(s==='projecao')renderProjecao();
+}
+
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
+
+function mediaFaturaUltimosCiclos(){
+  const cf=state.checkins.filter(c=>c.fatura>0);
+  if(!cf.length)return 0;
+  const map={};
+  cf.forEach(c=>{const ck=cicloKey(getCiclo(new Date(c.data+'T12:00:00')));map[ck]=c.fatura;});
+  const vals=Object.values(map);
+  return vals.length?Math.round(vals.reduce((a,b)=>a+b,0)/vals.length):0;
+}
+
+function calcITF(){
+  const ch=state.checkins;if(!ch.length)return null;
+  const last4=ch.slice(-4);
+  const freqPts=[0,15,40,75,100][Math.min(last4.length,4)];
+  let fatPts=65;
+  if(ch.length>=2){const p=ch[ch.length-2].fatura||0,c=ch[ch.length-1].fatura||0;if(p>0){const d=(c-p)/p;fatPts=d<=-0.1?100:d<=0.1?65:d<=0.25?35:10;}}
+  const emoMap={'😊':100,'😐':50,'😟':10};
+  const sentPts=last4.reduce((a,c)=>a+(emoMap[c.emoji]??50),0)/last4.length;
+  const last=ch[ch.length-1];
+  const pp=last.renda>0?(last.poupado/last.renda)*100:0;
+  const pouPts=pp>=20?100:pp>=15?80:pp>=10?60:pp>=5?35:pp>0?15:0;
+  const abrigoPts=Math.min((state.abrigo/ABRIGO_META)*100,100);
+  return Math.round(freqPts*.30+fatPts*.25+sentPts*.20+pouPts*.15+abrigoPts*.10);
+}
+
+function itfLevel(s){
+  if(s>=70)return{label:'Tranquilidade',color:'#3a7a5c'};
+  if(s>=40)return{label:'Construindo',color:'#b07d2a'};
+  return{label:'Atenção',color:'#c94f3a'};
+}
+
+function gerarAnalise(){
+  const ch=state.checkins;
+  if(!ch.length)return{icon:'🌱',text:'Bem-vinda ao seu abrigo. Faça seu primeiro check-in para começar.'};
+  const last=ch[ch.length-1],prev=ch.length>=2?ch[ch.length-2]:null;
+  const ciclo=getCiclo();
+  if(prev&&last.fatura>0&&prev.fatura>0){
+    const d=((last.fatura-prev.fatura)/prev.fatura)*100;
+    if(d<=-8)return{icon:'📉',text:`Sua fatura reduziu ${Math.abs(Math.round(d))}% em relação ao último registro. Excelente sinal para o ciclo que fecha dia ${ciclo.fechamento.getDate()}.`};
+    if(ch.length>=3&&last.fatura>ch[ch.length-3].fatura&&prev.fatura>ch[ch.length-3].fatura)
+      return{icon:'👀',text:`A fatura está subindo há três registros seguidos. Vale observar antes que o ciclo feche dia ${ciclo.fechamento.getDate()}.`};
+    if(d>=15)return{icon:'👀',text:`A fatura subiu ${Math.round(d)}% neste registro. Pode ser pontual — ciclo fecha dia ${ciclo.fechamento.getDate()}.`};
+  }
+  if(last.renda>0){
+    const pp=(last.poupado/last.renda)*100;
+    if(pp>=20)return{icon:'🎯',text:`Você atingiu sua meta de 20% esta semana — ${fmt(last.poupado)} guardados. Consistência real.`};
+    if(pp>=10)return{icon:'📈',text:`Você poupou ${Math.round(pp)}% esta semana. Na direção certa.`};
+    if(pp>0)return{icon:'🌱',text:`Mesmo com poupança menor, você manteve o hábito de registrar. Isso ajuda mais do que parece.`};
+  }
+  if(prev){const gap=(new Date(last.data)-new Date(prev.data))/86400000;if(gap>14)return{icon:'🔄',text:'Você voltou após um tempo sem registrar — e isso já é o mais importante. Cada recomeço conta.'};}
+  const ap=(state.abrigo/ABRIGO_META)*100;
+  if(ap>=50)return{icon:'🏡',text:`Metade do caminho! ${fmt(state.abrigo)} guardados de ${fmt(ABRIGO_META)}.`};
+  if(ap>0)return{icon:'🌿',text:`Seu abrigo cresce — ${fmt(state.abrigo)} guardados. Cada valor aumenta sua margem de tranquilidade.`};
+  return{icon:'✨',text:'Check-in registrado. Continue — a consistência semanal transforma o controle financeiro.'};
+}
+
+function renderDashboard(){
+  const ap=Math.min((state.abrigo/ABRIGO_META)*100,100);
+  document.getElementById('abrigo-current').textContent=fmt(state.abrigo);
+  document.getElementById('abrigo-bar').style.width=ap+'%';
+  document.getElementById('abrigo-pct').textContent=ap>0?Math.round(ap)+'% da meta':'0% — comece com qualquer valor';
+  const ciclo=getCiclo();
+  const pp=Math.min(Math.round((ciclo.passados/ciclo.total)*100),100);
+  document.getElementById('ciclo-datas').innerHTML=`<strong>${fmtD(ciclo.abertura)}</strong> → <strong>Fecha ${fmtD(ciclo.fechamento)}</strong> · Paga <strong>${fmtD(ciclo.pagamento)}</strong>`;
+  document.getElementById('ciclo-progresso-bar').style.width=pp+'%';
+  document.getElementById('ciclo-dias-ini').textContent=fmtD(ciclo.abertura);
+  const ck=state.checkins.filter(c=>{const d=new Date(c.data+'T12:00:00');return d>=ciclo.abertura&&d<=ciclo.fechamento;});
+  const fa=ck.length?ck[ck.length-1].fatura:null;
+  document.getElementById('ciclo-fatura-acum').textContent=fa!=null?fmt(fa):'—';
+  document.getElementById('ciclo-fatura-acum').className='ciclo-val'+(fa>5000?' warn':fa!=null?' ok':'');
+  const dr=ciclo.restantes;
+  document.getElementById('ciclo-dias-rest').textContent=dr>=0?dr+(dr===1?' dia':' dias'):'Encerrado';
+  document.getElementById('ciclo-dias-rest').className='ciclo-val'+(dr<=3&&dr>=0?' warn':'');
+  document.getElementById('ciclo-pgto').textContent=fmtD(ciclo.pagamento);
+  if(dr<=3&&dr>=0){document.getElementById('ciclo-badge').textContent='Fechando em breve';document.getElementById('ciclo-badge').className='ciclo-badge fechando';}
+  else{document.getElementById('ciclo-badge').textContent='Aberto';document.getElementById('ciclo-badge').className='ciclo-badge aberto';}
+  const now=new Date(),mk=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
+  const cm=state.checkins.filter(c=>c.data&&c.data.startsWith(mk));
+  const te=cm.reduce((a,c)=>a+(c.renda||0),0),ts=cm.reduce((a,c)=>a+(c.totalGasto||0),0),tec=cm.reduce((a,c)=>a+(c.poupado||0),0),sl=te-ts;
+  document.getElementById('m-entrou').textContent=cm.length?fmt(te):'R$ —';
+  document.getElementById('m-saiu').textContent=cm.length?fmt(ts):'R$ —';
+  document.getElementById('m-econ').textContent=cm.length?fmt(tec):'R$ —';
+  document.getElementById('m-econ').className='metric-value'+(tec>0?' positive':'');
+  document.getElementById('m-saldo').textContent=cm.length?fmt(sl):'R$ —';
+  document.getElementById('m-saldo').className='metric-value'+(sl>=0?' positive':' negative');
+  document.getElementById('m-entrou-sub').textContent=cm.length?`${cm.length} registro(s)`:'nenhum registro';
+  document.getElementById('m-saiu-sub').textContent=cm.length?`${cm.length} registro(s)`:'nenhum registro';
+  document.getElementById('m-econ-sub').textContent=te>0?Math.round((tec/te)*100)+'% da renda':'meta: 20%';
+  document.getElementById('m-saldo-sub').textContent=sl>=0?'positivo':'atenção';
+  const itf=calcITF();
+  if(itf!=null){const lv=itfLevel(itf);document.getElementById('itf-num').textContent=itf;document.getElementById('itf-score-label').textContent=itf+' pontos';document.getElementById('itf-level').textContent=lv.label;document.getElementById('itf-bar').style.cssText=`width:${itf}%;background:${lv.color}`;document.getElementById('itf-arc').setAttribute('stroke-dashoffset',163.4-(163.4*itf/100));document.getElementById('itf-arc').style.stroke=lv.color;}
+  const an=gerarAnalise();
+  document.querySelector('#analise-card .analise-icon').textContent=an.icon;
+  document.getElementById('analise-text').textContent=an.text;
+  renderChartFatura();
+}
+
+function renderChartFatura(){
+  const el=document.getElementById('chart-fatura');
+  const cf=state.checkins.filter(c=>c.fatura>0);
+  const map={};
+  cf.forEach(c=>{const ck=getCiclo(new Date(c.data+'T12:00:00'));const k=cicloKey(ck);map[k]={label:cicloLabel(ck),fatura:c.fatura,fech:ck.fechamento};});
+  const list=Object.values(map).sort((a,b)=>a.fech-b.fech).slice(-5);
+  if(!list.length){el.innerHTML='<div class="empty" style="padding:12px 0"><div class="empty-text" style="font-size:12px">Aparecerá após check-ins com fatura</div></div>';return;}
+  const max=Math.max(...list.map(c=>c.fatura));
+  const atual=getCiclo();
+  el.innerHTML=list.map(c=>{
+    const w=max>0?Math.max(Math.round((c.fatura/max)*100),4):4;
+    const isAt=c.fech>=atual.abertura&&c.fech<=atual.fechamento;
+    return`<div class="chart-row"><div class="chart-label">${c.label.split('→')[1].trim()}</div><div class="chart-bar-bg"><div class="chart-bar" style="width:${w}%;background:${isAt?'var(--sage)':'var(--sage-mid)'}"></div></div><div class="chart-val">${fmt(c.fatura)}${isAt?' <span style="font-size:10px;color:var(--sage)">atual</span>':''}</div></div>`;
+  }).join('');
+}
+
+function salvarRendaRef(v){state.rendaRef=parseFloat(v)||0;save();renderProjecao();}
+
+function adicionarFixo(){
+  const icon=document.getElementById('fixo-icon-sel').value;
+  const nome=document.getElementById('fixo-nome').value.trim();
+  const valor=parseFloat(document.getElementById('fixo-valor').value)||0;
+  if(!nome||!valor){toast('Preencha nome e valor');return;}
+  state.fixos.push({id:Date.now(),icon,nome,valor});
+  save();
+  document.getElementById('fixo-nome').value='';
+  document.getElementById('fixo-valor').value='';
+  renderFixos();renderProjCiclos();
+}
+
+function removerFixo(id){state.fixos=state.fixos.filter(f=>f.id!==id);save();renderFixos();renderProjCiclos();}
+
+function renderFixos(){
+  const el=document.getElementById('fixos-lista');
+  if(!state.fixos.length){el.innerHTML='<div class="empty" style="padding:10px 0"><div class="empty-text" style="font-size:12px">Nenhum fixo cadastrado ainda.</div></div>';document.getElementById('total-fixos').textContent='R$ 0';return;}
+  const total=state.fixos.reduce((a,f)=>a+f.valor,0);
+  document.getElementById('total-fixos').textContent=fmt(total);
+  el.innerHTML=state.fixos.map(f=>`
+    <div class="fixo-item">
+      <span class="fixo-icon">${f.icon}</span>
+      <div style="flex:1"><div class="fixo-nome">${f.nome}</div><div class="fixo-val">${fmt(f.valor)}/mês</div></div>
+      <button class="fixo-del" onclick="removerFixo(${f.id})">✕</button>
+    </div>`).join('');
+}
+
+function renderProjCiclos(){
+  const ciclos=proximosCiclos(3);
+  const mediaFatura=mediaFaturaUltimosCiclos();
+  const totalFixos=state.fixos.reduce((a,f)=>a+f.valor,0);
+  const renda=state.rendaRef||0;
+  const metaPoupanca=renda*0.2;
+  const el=document.getElementById('proj-ciclos');
+  const ajEl=document.getElementById('ajuste-faturas');
+  el.innerHTML=ciclos.map((c,i)=>{
+    const ck=cicloKey(c);
+    const faturaBase=mediaFatura||0;
+    const faturaAjustada=state.ajustesFatura[ck]!=null?state.ajustesFatura[ck]:faturaBase;
+    const totalSaidas=faturaAjustada+totalFixos;
+    const sobra=renda-totalSaidas;
+    const sobraAposPoupanca=sobra-metaPoupanca;
+    const poupancaViavel=sobra>=metaPoupanca;
+    let badgePoupanca='';
+    if(!renda)badgePoupanca=`<span class="badge-warn">Defina a renda</span>`;
+    else if(poupancaViavel)badgePoupanca=`<span class="badge-ok">20% viável ✓</span>`;
+    else if(sobra>0)badgePoupanca=`<span class="badge-warn">${Math.round((sobra/renda)*100)}% possível</span>`;
+    else badgePoupanca=`<span class="badge-no">Saldo negativo</span>`;
+    const sobraColor=sobraAposPoupanca>=0?' pos':' warn';
+    return`<div class="proj-mes">
+      <div class="proj-mes-header" onclick="toggleProjMes(${i})">
+        <div>
+          <div class="proj-mes-titulo">${i===0?'Ciclo atual':'Ciclo'} — fecha ${fmtD(c.fechamento)}</div>
+          <div class="proj-mes-sub">${fmtD(c.abertura)} → ${fmtD(c.fechamento)} · paga ${fmtD(c.pagamento)}</div>
+        </div>
+        <div>
+          <div class="proj-mes-saldo-val" style="color:${sobraAposPoupanca>=0?'var(--success)':sobraAposPoupanca>-500?'var(--warn)':'var(--danger)'}">${renda?fmt(sobraAposPoupanca):'—'}</div>
+          <div class="proj-mes-saldo-label">sobra após 20%</div>
+        </div>
+      </div>
+      <div class="proj-mes-body${i===0?' open':''}" id="proj-body-${i}">
+        <div class="proj-row"><span class="proj-row-label">Renda esperada</span><span class="proj-row-val pos">${renda?fmt(renda):'Não definida'}</span></div>
+        <div class="proj-row"><span class="proj-row-label">Fatura estimada</span><span class="proj-row-val neg">${fmt(faturaAjustada)} ${mediaFatura&&state.ajustesFatura[ck]==null?'<span style="font-size:10px;color:var(--text-3)">(média)</span>':'<span style="font-size:10px;color:var(--sage)">ajustada</span>'}</span></div>
+        <div class="proj-row"><span class="proj-row-label">Gastos fixos</span><span class="proj-row-val neg">${fmt(totalFixos)}</span></div>
+        <div class="proj-row" style="border-bottom:1.5px solid var(--border-mid)"><span class="proj-row-label" style="font-weight:600">Total saídas</span><span class="proj-row-val neg" style="font-size:15px">${fmt(totalSaidas)}</span></div>
+        <div class="proj-row"><span class="proj-row-label">Sobra bruta</span><span class="proj-row-val ${sobra>=0?'pos':'neg'}">${renda?fmt(sobra):'—'}</span></div>
+        <div class="proj-row"><span class="proj-row-label">Meta de poupança (20%)</span><span class="proj-row-val">${renda?fmt(metaPoupanca):'—'}</span></div>
+        <div class="proj-row" style="border-top:1.5px solid var(--border-mid)"><span class="proj-row-label" style="font-weight:600">Sobra após poupança</span><span class="proj-row-val${sobraColor}" style="font-size:15px">${renda?fmt(sobraAposPoupanca):'—'}</span></div>
+        ${renda?`<div class="proj-poupanca-bar">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;color:var(--text-2)">Meta de poupança de 20%</span>${badgePoupanca}</div>
+          <div class="proj-poupanca-bg"><div class="proj-poupanca-fill" style="width:${Math.min(poupancaViavel?100:Math.round((sobra/metaPoupanca)*100),100)}%;background:${poupancaViavel?'var(--success)':'var(--warn)'}"></div></div>
+          <div class="proj-poupanca-label"><span>0%</span><span>20% = ${fmt(metaPoupanca)}</span></div>
+        </div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  ajEl.innerHTML=ciclos.map((c)=>{
+    const ck=cicloKey(c);
+    const base=mediaFatura||0;
+    const ajustado=state.ajustesFatura[ck]!=null?state.ajustesFatura[ck]:base;
+    return`<div class="field" style="margin-bottom:10px">
+      <label>Ciclo ${fmtD(c.abertura)} → ${fmtD(c.fechamento)}</label>
+      <input type="number" value="${ajustado||''}" placeholder="${base?String(base):'sem histórico'}" min="0" step="100" oninput="ajustarFatura('${ck}',this.value)">
+      <div class="field-hint">${base?'Base (média): '+fmt(base):'Sem histórico — insira manualmente.'}${state.ajustesFatura[ck]!=null?' · <span style="color:var(--sage)">Ajustada</span>':''}</div>
+    </div>`;
+  }).join('');
+}
+
+function ajustarFatura(ck,v){
+  const val=parseFloat(v);
+  if(isNaN(val)||val<0)delete state.ajustesFatura[ck];
+  else state.ajustesFatura[ck]=val;
+  save();renderProjCiclos();
+}
+
+function toggleProjMes(i){document.getElementById('proj-body-'+i).classList.toggle('open');}
+
+function renderProjecao(){
+  document.getElementById('proj-renda-ref').value=state.rendaRef||'';
+  const renda=state.rendaRef;
+  document.getElementById('renda-ref-box').innerHTML=renda
+    ?`Usando <strong>${fmt(renda)}/mês</strong> como referência · Meta de poupança: <strong>${fmt(renda*0.2)}</strong>`
+    :'Defina sua renda mensal para calcular a projeção de poupança.';
+  renderFixos();renderProjCiclos();
+}
+
+function initCheckin(){
+  currentStep=1;currentEmoji='';
+  ['ci-renda','ci-poupado','ci-abrigo','ci-total-gasto','ci-fatura'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  document.querySelectorAll('.emoji-btn').forEach(b=>b.classList.remove('selected'));
+  renderCatGrid();renderStepDots();
+  document.querySelectorAll('.checkin-step').forEach((s,i)=>s.classList.toggle('active',i===0));
+  const ciclo=getCiclo();
+  document.getElementById('checkin-ciclo-info').innerHTML=`<strong>Ciclo atual:</strong> ${fmtD(ciclo.abertura)} → ${fmtD(ciclo.fechamento)} · Fecha em <strong>${ciclo.restantes} dias</strong> · Paga ${fmtD(ciclo.pagamento)}`;
+  document.getElementById('fatura-hint').textContent=`Ciclo ${fmtD(ciclo.abertura)} a ${fmtD(ciclo.fechamento)}. Informe o total acumulado até agora.`;
+  document.getElementById('ci-renda').addEventListener('input',function(){
+    const r=parseFloat(this.value)||0;
+    document.getElementById('poupado-hint').textContent=r>0?`Meta: 20% = ${fmt(r*0.2)} — quanto vai guardar?`:'Meta: 20% da renda. Preencha o valor acima.';
+  });
+}
+
+function renderStepDots(){
+  document.getElementById('step-dots').innerHTML=[1,2,3,4].map(i=>`<div class="dot ${i===currentStep?'active':i<currentStep?'done':''}"></div>`).join('');
+}
+
+function renderCatGrid(){
+  document.getElementById('cat-grid').innerHTML=CATS.map(c=>`
+    <div class="cat-item">
+      <span class="cat-icon">${c.icon}</span>
+      <div style="flex:1"><div class="cat-name">${c.name}</div><div class="cat-val" id="cat-display-${c.id}">—</div></div>
+      <input class="cat-input" type="number" id="cat-${c.id}" placeholder="0" min="0" oninput="document.getElementById('cat-display-${c.id}').textContent=this.value?'R$ '+this.value:'—'">
+    </div>`).join('');
+}
+
+function nextStep(n){
+  document.querySelectorAll('.checkin-step').forEach((s,i)=>s.classList.toggle('active',i===n-1));
+  currentStep=n;renderStepDots();
+  if(n===4)renderRevisao();
+}
+
+function selectEmoji(e){
+  currentEmoji=e;
+  document.querySelectorAll('.emoji-btn').forEach(b=>b.classList.remove('selected'));
+  const m={'😟':'emoji-ansioso','😐':'emoji-neutro','😊':'emoji-bem'};
+  document.getElementById(m[e]).classList.add('selected');
+}
+
+function renderRevisao(){
+  const r=parseFloat(document.getElementById('ci-renda').value)||0;
+  const p=parseFloat(document.getElementById('ci-poupado').value)||0;
+  const a=parseFloat(document.getElementById('ci-abrigo').value)||0;
+  const t=parseFloat(document.getElementById('ci-total-gasto').value)||0;
+  const f=parseFloat(document.getElementById('ci-fatura').value)||0;
+  const pp=r>0?Math.round((p/r)*100):0;
+  const ciclo=getCiclo();
+  document.getElementById('revisao-card').innerHTML=`
+    <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Ciclo: ${fmtD(ciclo.abertura)} → ${fmtD(ciclo.fechamento)}</div>
+    ${[['Entrou',fmt(r),'var(--success)'],['Total gasto',fmt(t),''],['Fatura no ciclo',fmt(f),''],['Poupado',fmt(p)+(pp>0?` (${pp}%)`:''),'var(--success)'],['No abrigo',fmt(a),'var(--sage-dark)']].map(([k,v,c])=>`
+    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+      <span style="font-size:13px;color:var(--text-2)">${k}</span>
+      <span style="font-size:14px;font-weight:600;color:${c||'var(--text)'}">${v}</span>
+    </div>`).join('')}
+    <div style="display:flex;justify-content:space-between;padding:8px 0"><span style="font-size:13px;color:var(--text-2)">Sentimento</span><span style="font-size:20px">${currentEmoji||'—'}</span></div>`;
+}
+
+function salvarCheckin(){
+  const na=parseFloat(document.getElementById('ci-abrigo').value)||0;
+  state.abrigo+=na;
+  const ciclo=getCiclo();
+  state.checkins.push({
+    data:new Date().toISOString().split('T')[0],
+    cicloFechamento:ciclo.fechamento.toISOString().split('T')[0],
+    renda:parseFloat(document.getElementById('ci-renda').value)||0,
+    poupado:parseFloat(document.getElementById('ci-poupado').value)||0,
+    totalGasto:parseFloat(document.getElementById('ci-total-gasto').value)||0,
+    fatura:parseFloat(document.getElementById('ci-fatura').value)||0,
+    abrigoAdicionado:na,
+    emoji:currentEmoji||'😐',
+    cats:Object.fromEntries(CATS.map(c=>[c.id,parseFloat(document.getElementById('cat-'+c.id)?.value)||0]).filter(([,v])=>v>0))
+  });
+  save();toast('Check-in salvo ✓');goTo('dashboard');
+}
+
+function renderHistorico(){
+  const el=document.getElementById('historico-list');
+  if(!state.checkins.length){el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Nenhum check-in ainda.</div></div>';return;}
+  el.innerHTML=[...state.checkins].reverse().map(c=>{
+    const d=new Date(c.data+'T12:00:00');
+    const ciclo=getCiclo(d);
+    const pp=c.renda>0?Math.round((c.poupado/c.renda)*100):0;
+    return`<div class="hist-item">
+      <div class="hist-top">
+        <div class="hist-semana">${d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'})}</div>
+        <div style="display:flex;gap:6px;align-items:center"><span class="hist-ciclo">${fmtDC(ciclo.abertura)}→${fmtDC(ciclo.fechamento)}</span><span style="font-size:16px">${c.emoji||'—'}</span></div>
+      </div>
+      <div class="hist-values">
+        <div class="hist-val"><strong>${fmt(c.renda)}</strong>entrou</div>
+        <div class="hist-val"><strong>${fmt(c.totalGasto)}</strong>saiu</div>
+        <div class="hist-val"><strong>${fmt(c.poupado)}${pp>0?' ('+pp+'%)':''}</strong>poupado</div>
+        ${c.fatura>0?`<div class="hist-val"><strong>${fmt(c.fatura)}</strong>fatura</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+renderDashboard();initCheckin();
+</script>
+</body>
+</html>
