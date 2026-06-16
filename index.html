@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,24 +15,16 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--cream);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh;}
-
-/* NAV */
 .nav{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
 .nav-logo{font-size:15px;font-weight:600;color:var(--sage-dark);letter-spacing:-.3px;}
 .nav-logo span{color:var(--sage);}
 .nav-tabs{display:flex;gap:2px;background:var(--stone-light);border-radius:var(--r-sm);padding:3px;}
 .nav-tab{padding:5px 10px;border-radius:6px;font-size:11px;font-weight:500;color:var(--text-2);cursor:pointer;border:none;background:transparent;transition:all .15s;}
 .nav-tab.active{background:var(--white);color:var(--sage-dark);box-shadow:0 1px 3px rgba(0,0,0,0.08);}
-
-/* SCREENS */
 .screen{display:none;padding:16px;max-width:680px;margin:0 auto;}
 .screen.active{display:block;}
-
-/* CARDS */
 .card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);padding:16px;margin-bottom:10px;}
 .card-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:12px;}
-
-/* METRICS */
 .metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
 .metric{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;}
 .metric-label{font-size:11px;color:var(--text-3);margin-bottom:3px;font-weight:500;}
@@ -39,8 +32,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .metric-value.positive{color:var(--success);}
 .metric-value.negative{color:var(--danger);}
 .metric-sub{font-size:11px;color:var(--text-3);margin-top:2px;}
-
-/* ABRIGO */
 .abrigo{background:linear-gradient(135deg,var(--sage-dark) 0%,var(--sage) 100%);border-radius:var(--r);padding:18px;margin-bottom:10px;color:white;}
 .abrigo-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;opacity:.75;margin-bottom:6px;}
 .abrigo-values{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px;}
@@ -50,8 +41,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .progress-bar{height:5px;background:rgba(255,255,255,0.25);border-radius:3px;overflow:hidden;}
 .progress-fill{height:100%;background:white;border-radius:3px;transition:width .6s ease;}
 .progress-pct{font-size:11px;opacity:.8;margin-top:5px;}
-
-/* CICLO */
 .ciclo-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:10px;}
 .ciclo-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
 .ciclo-titulo{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);}
@@ -69,28 +58,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ciclo-val{font-size:14px;font-weight:600;}
 .ciclo-val.warn{color:var(--warn);}
 .ciclo-val.ok{color:var(--success);}
-
-/* ITF */
+.ciclo-val.danger{color:var(--danger);}
 .itf-row{display:flex;align-items:center;gap:14px;}
 .itf-circle{width:60px;height:60px;flex-shrink:0;}
 .itf-score{font-size:26px;font-weight:700;letter-spacing:-.5px;}
 .itf-name{font-size:13px;color:var(--text-2);margin-top:2px;}
 .itf-bar-bg{height:4px;background:var(--stone-light);border-radius:2px;margin-top:8px;}
 .itf-bar-fill{height:4px;border-radius:2px;transition:width .6s ease;}
-
-/* ANÁLISE */
 .analise{background:var(--sage-light);border:1px solid var(--sage-mid);border-radius:var(--r);padding:14px;margin-bottom:10px;}
 .analise-icon{font-size:16px;margin-bottom:6px;}
 .analise-text{font-size:13px;color:var(--sage-dark);line-height:1.65;}
-
-/* CHART */
 .chart-row{display:flex;align-items:center;gap:10px;margin-bottom:7px;}
 .chart-label{font-size:11px;color:var(--text-3);width:52px;text-align:right;flex-shrink:0;}
 .chart-bar-bg{flex:1;height:22px;background:var(--stone-light);border-radius:4px;overflow:hidden;}
 .chart-bar{height:100%;border-radius:4px;min-width:4px;transition:width .5s ease;}
 .chart-val{font-size:11px;color:var(--text-2);width:76px;text-align:right;flex-shrink:0;}
-
-/* ── TYPEFORM CHECKIN ── */
+/* META FATURA */
+.meta-fatura-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:10px;}
+.meta-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);}
+.meta-row:last-child{border-bottom:none;}
+.meta-ciclo{font-size:12px;color:var(--text-2);flex:1;}
+.meta-ciclo-sub{font-size:10px;color:var(--text-3);margin-top:1px;}
+.meta-alvo{font-size:13px;font-weight:600;text-align:right;flex-shrink:0;width:80px;}
+.meta-status{font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;flex-shrink:0;}
+.ms-atual{background:var(--warn-bg);color:var(--warn);}
+.ms-prox{background:var(--stone-light);color:var(--text-3);}
+.ms-ok{background:var(--success-bg);color:var(--success);}
+/* TYPEFORM */
 .tf-wrap{min-height:calc(100vh - 56px);display:flex;flex-direction:column;justify-content:center;padding:24px 16px;}
 .tf-progress{height:3px;background:var(--stone-light);border-radius:2px;margin-bottom:32px;}
 .tf-progress-fill{height:3px;background:var(--sage);border-radius:2px;transition:width .4s ease;}
@@ -137,7 +131,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tf-summary-val{font-size:13px;font-weight:600;color:var(--text);}
 .tf-summary-val.pos{color:var(--success);}
 .tf-summary-val.neg{color:var(--danger);}
-
 /* PROJEÇÃO */
 .proj-mes{background:var(--white);border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden;}
 .proj-mes-header{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;}
@@ -154,15 +147,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .proj-row-val{font-weight:600;}
 .proj-row-val.neg{color:var(--danger);}
 .proj-row-val.pos{color:var(--success);}
-.proj-row-val.warn{color:var(--warn);}
 .proj-poupanca-bg{height:6px;background:var(--stone-light);border-radius:3px;margin-top:8px;}
 .proj-poupanca-fill{height:6px;border-radius:3px;transition:width .5s;}
 .proj-poupanca-label{display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);margin-top:3px;}
 .badge-ok{background:var(--success-bg);color:var(--success);font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;}
 .badge-warn{background:var(--warn-bg);color:var(--warn);font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;}
 .badge-no{background:#fdf0ee;color:var(--danger);font-size:10px;font-weight:600;padding:2px 8px;border-radius:99px;}
-
-/* FIXOS */
 .fixo-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
 .fixo-item:last-child{border-bottom:none;}
 .fixo-icon-wrap{font-size:18px;width:28px;text-align:center;flex-shrink:0;}
@@ -171,8 +161,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .fixo-meta{font-size:11px;color:var(--text-3);margin-top:2px;}
 .fixo-del{background:none;border:none;cursor:pointer;color:var(--text-3);font-size:16px;padding:4px;border-radius:6px;}
 .fixo-del:hover{color:var(--danger);background:#fdf0ee;}
-
-/* HISTÓRICO */
 .hist-item{padding:12px 0;border-bottom:1px solid var(--border);}
 .hist-item:last-child{border-bottom:none;}
 .hist-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
@@ -182,8 +170,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hist-badge.saida{background:#fdf0ee;color:var(--danger);}
 .hist-badge.investimento{background:var(--sage-light);color:var(--sage-dark);}
 .hist-meta{font-size:12px;color:var(--text-3);}
-
-/* RENDA REF */
 .renda-ref-box{background:var(--sage-light);border:1px solid var(--sage-mid);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:12px;font-size:12px;color:var(--sage-dark);line-height:1.6;}
 .renda-ref-box strong{font-weight:600;}
 .field{margin-bottom:12px;}
@@ -194,15 +180,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .section-divider{height:1px;background:var(--border);margin:12px 0;}
 .btn-add{background:var(--sage-dark);color:white;border:none;border-radius:var(--r-sm);padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;}
 .btn-add:hover{background:var(--sage);}
-
-/* AJUSTE FATURA */
 .ajuste-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);}
 .ajuste-row:last-child{border-bottom:none;}
 .ajuste-label{font-size:12px;color:var(--text-2);}
 .ajuste-input{width:110px;border:1px solid var(--border-mid);border-radius:var(--r-sm);padding:6px 10px;font-size:13px;text-align:right;outline:none;}
 .ajuste-input:focus{border-color:var(--sage);}
-
-/* TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--sage-dark);color:white;padding:10px 20px;border-radius:99px;font-size:13px;font-weight:500;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;white-space:nowrap;}
 .toast.show{opacity:1;}
 .empty{text-align:center;padding:28px 20px;color:var(--text-3);}
@@ -247,13 +229,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="dias-label"><span id="ciclo-dias-ini"></span><span>Fecha dia 13</span></div>
     <div class="section-divider" style="margin-top:8px"></div>
     <div class="ciclo-row"><span class="ciclo-key">Fatura acumulada</span><span class="ciclo-val" id="ciclo-fatura-acum">—</span></div>
+    <div class="ciclo-row"><span class="ciclo-key">Meta deste ciclo</span><span class="ciclo-val" id="ciclo-meta-val">—</span></div>
+    <div class="ciclo-row"><span class="ciclo-key">Margem restante</span><span class="ciclo-val" id="ciclo-margem">—</span></div>
     <div class="ciclo-row"><span class="ciclo-key">Dias até fechar</span><span class="ciclo-val" id="ciclo-dias-rest">—</span></div>
     <div class="ciclo-row"><span class="ciclo-key">Pagamento</span><span class="ciclo-val" id="ciclo-pgto">—</span></div>
   </div>
+
+  <!-- ESCADA DE METAS -->
+  <div class="meta-fatura-card">
+    <div class="card-title">Escada de metas — fatura do cartão</div>
+    <div id="escada-metas"></div>
+  </div>
+
   <div class="metric-grid">
     <div class="metric"><div class="metric-label">Entrou este mês</div><div class="metric-value positive" id="m-entrou">R$ —</div><div class="metric-sub" id="m-entrou-sub">nenhum registro</div></div>
     <div class="metric"><div class="metric-label">Total gasto</div><div class="metric-value" id="m-saiu">R$ —</div><div class="metric-sub" id="m-saiu-sub">nenhum registro</div></div>
-    <div class="metric"><div class="metric-label">Poupado</div><div class="metric-value positive" id="m-econ">R$ —</div><div class="metric-sub" id="m-econ-sub">meta: 20%</div></div>
+    <div class="metric"><div class="metric-label">Poupado</div><div class="metric-value positive" id="m-econ">R$ —</div><div class="metric-sub" id="m-econ-sub">meta: 20% = R$ 1.346</div></div>
     <div class="metric"><div class="metric-label">Saldo disponível</div><div class="metric-value" id="m-saldo">R$ —</div><div class="metric-sub" id="m-saldo-sub">entrou − saiu</div></div>
   </div>
   <div class="card">
@@ -273,7 +264,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
   <div class="card">
     <div class="card-title">Fatura por ciclo</div>
-    <div id="chart-fatura"><div class="empty" style="padding:14px 0"><div class="empty-text" style="font-size:12px">Aparecerá após registros com fatura de crédito</div></div></div>
+    <div id="chart-fatura"><div class="empty" style="padding:14px 0"><div class="empty-text" style="font-size:12px">Aparecerá após registros com crédito</div></div></div>
   </div>
 </div>
 
@@ -288,13 +279,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- PROJEÇÃO -->
 <div id="screen-projecao" class="screen">
   <div class="card">
-    <div class="card-title">Renda mensal de referência</div>
-    <div class="renda-ref-box" id="renda-ref-box">Defina sua renda mensal para calcular a projeção.</div>
-    <div class="field" style="margin-bottom:0"><label>Renda mensal esperada (R$)</label><input type="number" id="proj-renda-ref" placeholder="Ex: 10000" min="0" step="100" oninput="salvarRendaRef(this.value)"></div>
+    <div class="card-title">Renda mensal</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);">
+        <span style="color:var(--text-2)">Salário (dia 15)</span><span style="font-weight:600;color:var(--success)">R$ 6.000</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);">
+        <span style="color:var(--text-2)">iFood Benefícios (dia 5 · só alimentação)</span><span style="font-weight:600;color:var(--success)">R$ 600</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);">
+        <span style="color:var(--text-2)">Aluguel da vaga (dia 27)</span><span style="font-weight:600;color:var(--success)">R$ 130</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;font-weight:600;">
+        <span>Total</span><span>R$ 6.730</span>
+      </div>
+    </div>
+    <div class="renda-ref-box">Meta de poupança: <strong>20% = R$ 1.346/mês</strong> · Renda livre (sem benefício): <strong>R$ 6.130</strong></div>
   </div>
   <div class="card">
     <div class="card-title">Gastos fixos / recorrentes</div>
-    <div id="fixos-lista"><div class="empty" style="padding:10px 0"><div class="empty-text" style="font-size:12px">Nenhum fixo cadastrado. Marque "é recorrente" ao registrar uma despesa.</div></div></div>
+    <div id="fixos-lista"></div>
     <div style="margin-top:8px;font-size:12px;color:var(--text-3)">Total fixos: <strong id="total-fixos" style="color:var(--text)">R$ 0</strong></div>
   </div>
   <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:10px">Projeção — próximos 3 ciclos</div>
@@ -318,6 +322,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <script>
 const ABRIGO_META=36000;
+const RENDA_TOTAL=6730;
+const META_POUPANCA=1346;
+
+const FIXOS_DEFAULT=[
+  {id:1,icon:'🏠',nome:'Aluguel',valor:1600,meio:'pix',diaVencimento:15,categoria:null,recorrente:true},
+  {id:2,icon:'💪',nome:'Wellhub',valor:183,meio:'credito',diaVencimento:15,categoria:'assinaturas',recorrente:true},
+  {id:3,icon:'🌐',nome:'Internet (Vivo)',valor:100,meio:'credito',diaVencimento:1,categoria:'contas',recorrente:true},
+  {id:4,icon:'📱',nome:'Celular',valor:30,meio:'pix',diaVencimento:18,categoria:'contas',recorrente:true},
+  {id:5,icon:'⚡',nome:'Energia',valor:150,meio:'pix',diaVencimento:28,categoria:'contas',recorrente:true},
+  {id:6,icon:'🐾',nome:'PetLove Saúde (Faísca)',valor:15.56,meio:'credito',diaVencimento:null,categoria:'petshop',recorrente:true},
+  {id:7,icon:'🐾',nome:'PetLove Dog Hero (12x)',valor:7.45,meio:'credito',diaVencimento:null,categoria:'petshop',recorrente:true},
+  {id:8,icon:'☁️',nome:'Google One',valor:12.50,meio:'credito',diaVencimento:null,categoria:'assinaturas',recorrente:true},
+  {id:9,icon:'📚',nome:'EscolaBren (10x · encerra dez/26)',valor:23.88,meio:'credito',diaVencimento:null,categoria:'assinaturas',recorrente:true},
+];
+
+// Metas da escada de fatura
+const METAS_FATURA=[
+  {fechamento:'2026-07-13',pagamento:'15/jul',alvo:3000,label:'Degrau 1',obs:'Viagem Ubatuba incluída'},
+  {fechamento:'2026-08-13',pagamento:'15/ago',alvo:3000,label:'Degrau 2',obs:'Aspirador encerrado'},
+  {fechamento:'2026-09-13',pagamento:'15/set',alvo:2000,label:'Degrau 3',obs:'Meta principal'},
+  {fechamento:'2026-10-13',pagamento:'15/out',alvo:2000,label:'Manutenção',obs:'Estabilização'},
+];
+
 const CATS=[
   {id:'mercado',name:'Mercado',icon:'🛒'},
   {id:'delivery',name:'Delivery',icon:'🛵'},
@@ -331,15 +358,18 @@ const CATS=[
   {id:'outro',name:'Outro',icon:'📦'},
 ];
 
-let state=JSON.parse(localStorage.getItem('abrigo_v4')||JSON.stringify({
-  abrigo:0,registros:[],fixos:[],rendaRef:0,ajustesFatura:{}
-}));
-['fixos','ajustesFatura','registros'].forEach(k=>{if(!state[k])state[k]=k==='ajustesFatura'?{}:[];});
-if(!state.rendaRef)state.rendaRef=0;
-
+let state=JSON.parse(localStorage.getItem('abrigo_v4')||'null');
+if(!state){
+  state={abrigo:0,registros:[],fixos:JSON.parse(JSON.stringify(FIXOS_DEFAULT)),rendaRef:6730,ajustesFatura:{}};
+} else {
+  // Garante fixos default se lista vazia
+  if(!state.fixos||state.fixos.length===0) state.fixos=JSON.parse(JSON.stringify(FIXOS_DEFAULT));
+  if(!state.ajustesFatura)state.ajustesFatura={};
+  state.rendaRef=6730;
+}
 function save(){localStorage.setItem('abrigo_v4',JSON.stringify(state));}
 
-// ── CICLO ───────────────────────────────────────────────────
+// CICLO
 function getCiclo(ref){
   const d=ref||new Date(),dia=d.getDate(),mes=d.getMonth(),ano=d.getFullYear();
   let iM,iA,fM,fA;
@@ -357,13 +387,20 @@ function proximosCiclos(n){
   return cs;
 }
 function cicloKey(c){return`${c.fechamento.getFullYear()}-${String(c.fechamento.getMonth()+1).padStart(2,'0')}`;}
-function cicloLabel(c){return`${fmtDC(c.abertura)}→${fmtDC(c.fechamento)}`;}
 function fmtD(d){return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short'});}
 function fmtDC(d){return`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;}
 function fmt(v){return'R$ '+Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});}
 function today(){return new Date().toISOString().split('T')[0];}
 
-// ── NAV ─────────────────────────────────────────────────────
+// Meta da fatura para o ciclo atual
+function getMetaCicloAtual(){
+  const ciclo=getCiclo();
+  const fechStr=ciclo.fechamento.toISOString().split('T')[0];
+  const meta=METAS_FATURA.find(m=>m.fechamento===fechStr);
+  return meta||null;
+}
+
+// NAV
 function goTo(s){
   document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(x=>x.classList.remove('active'));
@@ -377,289 +414,219 @@ function goTo(s){
 
 function showToast(msg){const t=document.getElementById('toast-el');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
 
-// ── TYPEFORM ENGINE ──────────────────────────────────────────
+// TYPEFORM
 let tf={};
-
 function initTF(){
   tf={tipo:null,data:today(),meio:null,categoria:null,valor:0,recorrente:false,diaVencimento:null};
   renderStep('tipo');
 }
-
 const STEPS_SAIDA=['tipo','data','meio','categoria','valor','recorrente'];
 const STEPS_ENTRADA=['tipo','data','valor_entrada'];
 const STEPS_INVEST=['tipo','data','valor_invest'];
-
 function getSteps(){
-  if(tf.tipo==='saida') return STEPS_SAIDA;
-  if(tf.tipo==='entrada') return STEPS_ENTRADA;
-  if(tf.tipo==='investimento') return STEPS_INVEST;
+  if(tf.tipo==='saida')return STEPS_SAIDA;
+  if(tf.tipo==='entrada')return STEPS_ENTRADA;
+  if(tf.tipo==='investimento')return STEPS_INVEST;
   return['tipo'];
 }
-
 function stepProgress(step){
   const steps=getSteps();
   const idx=steps.indexOf(step);
   if(idx<0)return 10;
   return Math.round(((idx+1)/steps.length)*100);
 }
-
 function renderStep(step){
-  const pct=stepProgress(step);
-  document.getElementById('tf-progress').style.width=pct+'%';
+  document.getElementById('tf-progress').style.width=stepProgress(step)+'%';
   const el=document.getElementById('tf-content');
   const steps=getSteps();
   const idx=steps.indexOf(step);
   const showBack=idx>0;
-
   let html='';
-
   if(step==='tipo'){
-    html=`
-      <div class="tf-question">O que você quer registrar?</div>
-      <div class="tf-sub">Escolha o tipo de movimentação.</div>
-      <div class="tf-options">
-        <div class="tf-option${tf.tipo==='saida'?' selected':''}" onclick="tfSelect('tipo','saida')">
-          <span class="tf-option-icon">💸</span>
-          <div><div class="tf-option-label">Saída</div><div class="tf-option-sub">Gasto no débito, pix ou crédito</div></div>
-        </div>
-        <div class="tf-option${tf.tipo==='entrada'?' selected':''}" onclick="tfSelect('tipo','entrada')">
-          <span class="tf-option-icon">💰</span>
-          <div><div class="tf-option-label">Entrada</div><div class="tf-option-sub">Salário, freela, qualquer receita</div></div>
-        </div>
-        <div class="tf-option${tf.tipo==='investimento'?' selected':''}" onclick="tfSelect('tipo','investimento')">
-          <span class="tf-option-icon">🏡</span>
-          <div><div class="tf-option-label">Investimento / Poupança</div><div class="tf-option-sub">Valor guardado ou enviado ao abrigo</div></div>
-        </div>
+    html=`<div class="tf-question">O que você quer registrar?</div>
+    <div class="tf-sub">Escolha o tipo de movimentação.</div>
+    <div class="tf-options">
+      <div class="tf-option${tf.tipo==='saida'?' selected':''}" onclick="tfSelect('tipo','saida')">
+        <span class="tf-option-icon">💸</span>
+        <div><div class="tf-option-label">Saída</div><div class="tf-option-sub">Gasto no débito, pix ou crédito</div></div>
       </div>
-      <div class="tf-actions">
-        <button class="tf-btn tf-btn-primary" onclick="tfNext('tipo')" ${!tf.tipo?'disabled style="opacity:.4;cursor:not-allowed"':''}>Continuar →</button>
-      </div>`;
+      <div class="tf-option${tf.tipo==='entrada'?' selected':''}" onclick="tfSelect('tipo','entrada')">
+        <span class="tf-option-icon">💰</span>
+        <div><div class="tf-option-label">Entrada</div><div class="tf-option-sub">Salário, freela, qualquer receita</div></div>
+      </div>
+      <div class="tf-option${tf.tipo==='investimento'?' selected':''}" onclick="tfSelect('tipo','investimento')">
+        <span class="tf-option-icon">🏡</span>
+        <div><div class="tf-option-label">Investimento / Poupança</div><div class="tf-option-sub">Valor guardado ou enviado ao abrigo</div></div>
+      </div>
+    </div>
+    <div class="tf-actions"><button class="tf-btn tf-btn-primary" onclick="tfNext('tipo')" ${!tf.tipo?'disabled style="opacity:.4;cursor:not-allowed"':''}>Continuar →</button></div>`;
   }
-
   else if(step==='data'){
-    html=`
-      ${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
-      <div class="tf-question">Para qual data?</div>
-      <div class="tf-sub">Pode ser hoje ou uma data passada que você esqueceu de registrar.</div>
-      <div class="tf-input-wrap">
-        <input type="date" class="tf-date-input" id="tf-data" value="${tf.data}" max="${today()}" onchange="tf.data=this.value">
-      </div>
-      <div class="tf-actions">
-        <button class="tf-btn tf-btn-primary" onclick="tfNext('data')">Continuar →</button>
-      </div>`;
+    html=`${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
+    <div class="tf-question">Para qual data?</div>
+    <div class="tf-sub">Pode ser hoje ou uma data passada que você esqueceu de registrar.</div>
+    <div class="tf-input-wrap"><input type="date" class="tf-date-input" id="tf-data" value="${tf.data}" max="${today()}" onchange="tf.data=this.value"></div>
+    <div class="tf-actions"><button class="tf-btn tf-btn-primary" onclick="tfNext('data')">Continuar →</button></div>`;
   }
-
   else if(step==='meio'){
-    html=`
-      ${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
-      <div class="tf-question">Foi no débito/pix ou crédito?</div>
-      <div class="tf-sub">Isso define se entra na fatura do cartão ou sai direto do saldo.</div>
-      <div class="tf-options">
-        <div class="tf-option${tf.meio==='debito'?' selected':''}" onclick="tfSelect('meio','debito')">
-          <span class="tf-option-icon">🏦</span>
-          <div><div class="tf-option-label">Débito / Pix / Dinheiro</div><div class="tf-option-sub">Saiu direto da conta</div></div>
-        </div>
-        <div class="tf-option${tf.meio==='credito'?' selected':''}" onclick="tfSelect('meio','credito')">
-          <span class="tf-option-icon">💳</span>
-          <div><div class="tf-option-label">Crédito</div><div class="tf-option-sub">Entra na fatura do ciclo atual</div></div>
-        </div>
+    html=`${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
+    <div class="tf-question">Foi no débito/pix ou crédito?</div>
+    <div class="tf-sub">Isso define se entra na fatura ou sai direto do saldo.</div>
+    <div class="tf-options">
+      <div class="tf-option${tf.meio==='debito'?' selected':''}" onclick="tfSelect('meio','debito')">
+        <span class="tf-option-icon">🏦</span>
+        <div><div class="tf-option-label">Débito / Pix / Dinheiro</div><div class="tf-option-sub">Saiu direto da conta</div></div>
       </div>
-      <div class="tf-actions">
-        <button class="tf-btn tf-btn-primary" onclick="tfNext('meio')" ${!tf.meio?'disabled style="opacity:.4;cursor:not-allowed"':''}>Continuar →</button>
-      </div>`;
+      <div class="tf-option${tf.meio==='credito'?' selected':''}" onclick="tfSelect('meio','credito')">
+        <span class="tf-option-icon">💳</span>
+        <div><div class="tf-option-label">Crédito</div><div class="tf-option-sub">Entra na fatura do ciclo atual</div></div>
+      </div>
+    </div>
+    <div class="tf-actions"><button class="tf-btn tf-btn-primary" onclick="tfNext('meio')" ${!tf.meio?'disabled style="opacity:.4;cursor:not-allowed"':''}>Continuar →</button></div>`;
   }
-
   else if(step==='categoria'){
-    html=`
-      ${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
-      <div class="tf-question">Qual categoria?</div>
-      <div class="tf-sub">Opcional — pule se não quiser categorizar.</div>
-      <div class="tf-cat-grid">
-        ${CATS.map(c=>`<div class="tf-cat${tf.categoria===c.id?' selected':''}" onclick="tfSelectCat('${c.id}')"><span class="tf-cat-icon">${c.icon}</span><span class="tf-cat-name">${c.name}</span></div>`).join('')}
-      </div>
-      <div class="tf-actions">
-        <button class="tf-btn tf-btn-primary" onclick="tfNext('categoria')">Continuar →</button>
-        <button class="tf-btn-secondary" onclick="tf.categoria=null;tfNext('categoria')">Pular</button>
-      </div>`;
+    html=`${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
+    <div class="tf-question">Qual categoria?</div>
+    <div class="tf-sub">Opcional — pule se não quiser categorizar.</div>
+    <div class="tf-cat-grid">${CATS.map(c=>`<div class="tf-cat${tf.categoria===c.id?' selected':''}" onclick="tfSelectCat('${c.id}')"><span class="tf-cat-icon">${c.icon}</span><span class="tf-cat-name">${c.name}</span></div>`).join('')}</div>
+    <div class="tf-actions">
+      <button class="tf-btn tf-btn-primary" onclick="tfNext('categoria')">Continuar →</button>
+      <button class="tf-btn-secondary" onclick="tf.categoria=null;tfNext('categoria')">Pular</button>
+    </div>`;
   }
-
   else if(step==='valor'){
     const catObj=CATS.find(c=>c.id===tf.categoria);
-    html=`
-      ${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
-      <div class="tf-question">Qual o valor?</div>
-      ${catObj?`<div class="tf-sub">${catObj.icon} ${catObj.name} · ${tf.meio==='credito'?'Crédito — entra na fatura':'Débito/Pix'}</div>`:`<div class="tf-sub">${tf.meio==='credito'?'Crédito — entra na fatura do ciclo atual':'Débito/Pix — sai direto da conta'}</div>`}
-      <div class="tf-input-wrap">
-        <input type="number" class="tf-input" id="tf-valor" placeholder="0,00" min="0" step="0.01" value="${tf.valor||''}" oninput="tf.valor=parseFloat(this.value)||0" autofocus>
-        <div class="tf-input-label">reais</div>
-      </div>
-      <div class="tf-actions">
-        <button class="tf-btn tf-btn-primary" onclick="tfNext('valor')">Continuar →</button>
-      </div>`;
+    html=`${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
+    <div class="tf-question">Qual o valor?</div>
+    <div class="tf-sub">${catObj?catObj.icon+' '+catObj.name+' · ':''}${tf.meio==='credito'?'Crédito — entra na fatura':'Débito/Pix — sai da conta'}</div>
+    <div class="tf-input-wrap">
+      <input type="number" class="tf-input" id="tf-valor" placeholder="0,00" min="0" step="0.01" value="${tf.valor||''}" oninput="tf.valor=parseFloat(this.value)||0" autofocus>
+      <div class="tf-input-label">reais</div>
+    </div>
+    <div class="tf-actions"><button class="tf-btn tf-btn-primary" onclick="tfNext('valor')">Continuar →</button></div>`;
   }
-
   else if(step==='recorrente'){
-    html=`
-      ${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
-      <div class="tf-question">Esse gasto é recorrente?</div>
-      <div class="tf-sub">Se sim, ele vai para a lista de fixos e aparece na projeção todo mês.</div>
-      <div class="tf-recorrente-row">
-        <div class="tf-recorrente-opt${tf.recorrente===true?' selected':''}" onclick="tfSelectRecorrente(true)">
-          <div class="tf-recorrente-opt-icon">🔁</div>
-          <div class="tf-recorrente-opt-label">Sim, é fixo</div>
-        </div>
-        <div class="tf-recorrente-opt${tf.recorrente===false&&tf.recorrente!==null?' selected':''}" onclick="tfSelectRecorrente(false)">
-          <div class="tf-recorrente-opt-icon">✦</div>
-          <div class="tf-recorrente-opt-label">Não, foi pontual</div>
-        </div>
+    html=`${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
+    <div class="tf-question">Esse gasto é recorrente?</div>
+    <div class="tf-sub">Se sim, vai para a lista de fixos e aparece na projeção todo mês.</div>
+    <div class="tf-recorrente-row">
+      <div class="tf-recorrente-opt${tf.recorrente===true?' selected':''}" onclick="tfSelectRecorrente(true)">
+        <div class="tf-recorrente-opt-icon">🔁</div><div class="tf-recorrente-opt-label">Sim, é fixo</div>
       </div>
-      ${tf.recorrente===true?`
-      <div class="tf-input-wrap">
-        <div style="font-size:13px;color:var(--text-2);margin-bottom:8px">Qual o dia do mês que vence ou costuma cair?</div>
-        <input type="number" class="tf-input" id="tf-dia-venc" placeholder="Ex: 5" min="1" max="31" value="${tf.diaVencimento||''}" oninput="tf.diaVencimento=parseInt(this.value)||null" style="font-size:22px">
-        <div class="tf-input-label">dia do mês</div>
-      </div>`:''}
-      <div class="tf-actions">
-        <button class="tf-btn tf-btn-primary" onclick="tfNext('recorrente')" ${tf.recorrente===null?'disabled style="opacity:.4;cursor:not-allowed"':''}>Continuar →</button>
-        <button class="tf-btn-secondary" onclick="tf.recorrente=false;tfNext('recorrente')">Pular</button>
-      </div>`;
+      <div class="tf-recorrente-opt${tf.recorrente===false&&tf.recorrente!==null?' selected':''}" onclick="tfSelectRecorrente(false)">
+        <div class="tf-recorrente-opt-icon">✦</div><div class="tf-recorrente-opt-label">Não, foi pontual</div>
+      </div>
+    </div>
+    ${tf.recorrente===true?`<div class="tf-input-wrap">
+      <div style="font-size:13px;color:var(--text-2);margin-bottom:8px">Qual o dia do mês que vence?</div>
+      <input type="number" class="tf-input" id="tf-dia-venc" placeholder="Ex: 5" min="1" max="31" value="${tf.diaVencimento||''}" oninput="tf.diaVencimento=parseInt(this.value)||null" style="font-size:22px">
+      <div class="tf-input-label">dia do mês</div>
+    </div>`:''}
+    <div class="tf-actions">
+      <button class="tf-btn tf-btn-primary" onclick="tfNext('recorrente')" ${tf.recorrente===null?'disabled style="opacity:.4;cursor:not-allowed"':''}>Continuar →</button>
+      <button class="tf-btn-secondary" onclick="tf.recorrente=false;tfNext('recorrente')">Pular</button>
+    </div>`;
   }
-
   else if(step==='valor_entrada'){
-    html=`
-      ${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
-      <div class="tf-question">Qual o valor que entrou?</div>
-      <div class="tf-sub">Salário, freela, transferência recebida — qualquer receita.</div>
-      <div class="tf-input-wrap">
-        <input type="number" class="tf-input" id="tf-valor" placeholder="0,00" min="0" step="0.01" value="${tf.valor||''}" oninput="tf.valor=parseFloat(this.value)||0" autofocus>
-        <div class="tf-input-label">reais</div>
-      </div>
-      <div class="tf-actions">
-        <button class="tf-btn tf-btn-primary" onclick="tfNext('valor_entrada')">Continuar →</button>
-      </div>`;
+    html=`${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
+    <div class="tf-question">Qual o valor que entrou?</div>
+    <div class="tf-sub">Salário, freela, transferência — qualquer receita.</div>
+    <div class="tf-input-wrap">
+      <input type="number" class="tf-input" id="tf-valor" placeholder="0,00" min="0" step="0.01" value="${tf.valor||''}" oninput="tf.valor=parseFloat(this.value)||0" autofocus>
+      <div class="tf-input-label">reais</div>
+    </div>
+    <div class="tf-actions"><button class="tf-btn tf-btn-primary" onclick="tfNext('valor_entrada')">Continuar →</button></div>`;
   }
-
   else if(step==='valor_invest'){
-    html=`
-      ${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
-      <div class="tf-question">Quanto você guardou?</div>
-      <div class="tf-sub">Valor poupado ou investido — vai para o seu abrigo financeiro.</div>
-      <div class="tf-input-wrap">
-        <input type="number" class="tf-input" id="tf-valor" placeholder="0,00" min="0" step="0.01" value="${tf.valor||''}" oninput="tf.valor=parseFloat(this.value)||0" autofocus>
-        <div class="tf-input-label">reais</div>
-        ${state.abrigo>0?`<div class="tf-input-hint">Abrigo atual: ${fmt(state.abrigo)} de ${fmt(ABRIGO_META)}</div>`:''}
-      </div>
-      <div class="tf-actions">
-        <button class="tf-btn tf-btn-primary" onclick="tfNext('valor_invest')">Continuar →</button>
-      </div>`;
+    html=`${showBack?`<button class="tf-back" onclick="tfBack('${step}')">← Voltar</button><br><br>`:''}
+    <div class="tf-question">Quanto você guardou?</div>
+    <div class="tf-sub">Vai para o seu abrigo financeiro.</div>
+    <div class="tf-input-wrap">
+      <input type="number" class="tf-input" id="tf-valor" placeholder="0,00" min="0" step="0.01" value="${tf.valor||''}" oninput="tf.valor=parseFloat(this.value)||0" autofocus>
+      <div class="tf-input-label">reais</div>
+      ${state.abrigo>0?`<div class="tf-input-hint">Abrigo atual: ${fmt(state.abrigo)} de ${fmt(ABRIGO_META)}</div>`:''}
+    </div>
+    <div class="tf-actions"><button class="tf-btn tf-btn-primary" onclick="tfNext('valor_invest')">Continuar →</button></div>`;
   }
-
   else if(step==='confirmar'){
     const catObj=CATS.find(c=>c.id===tf.categoria);
     const rows=[];
     if(tf.tipo==='saida'){
-      rows.push(['Tipo','💸 Saída']);
-      rows.push(['Data',new Date(tf.data+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'})]);
-      rows.push(['Meio',tf.meio==='credito'?'💳 Crédito':'🏦 Débito/Pix']);
-      if(catObj) rows.push(['Categoria',catObj.icon+' '+catObj.name]);
+      rows.push(['Tipo','💸 Saída','']);
+      rows.push(['Data',new Date(tf.data+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'}),'']);
+      rows.push(['Meio',tf.meio==='credito'?'💳 Crédito':'🏦 Débito/Pix','']);
+      if(catObj)rows.push(['Categoria',catObj.icon+' '+catObj.name,'']);
       rows.push(['Valor',fmt(tf.valor),'neg']);
-      if(tf.recorrente) rows.push(['Recorrente','🔁 Sim — dia '+tf.diaVencimento+' de cada mês']);
+      if(tf.recorrente)rows.push(['Recorrente','🔁 Sim — dia '+(tf.diaVencimento||'?')+' de cada mês','']);
     } else if(tf.tipo==='entrada'){
-      rows.push(['Tipo','💰 Entrada']);
-      rows.push(['Data',new Date(tf.data+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'})]);
+      rows.push(['Tipo','💰 Entrada','']);
+      rows.push(['Data',new Date(tf.data+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'}),'']);
       rows.push(['Valor',fmt(tf.valor),'pos']);
     } else {
-      rows.push(['Tipo','🏡 Investimento']);
-      rows.push(['Data',new Date(tf.data+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'})]);
+      rows.push(['Tipo','🏡 Investimento','']);
+      rows.push(['Data',new Date(tf.data+'T12:00:00').toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'}),'']);
       rows.push(['Valor',fmt(tf.valor),'pos']);
     }
-    html=`
-      <div class="tf-question">Tudo certo?</div>
-      <div class="tf-sub">Confirme antes de salvar.</div>
-      <div class="tf-summary">
-        ${rows.map(([k,v,cls])=>`<div class="tf-summary-row"><span class="tf-summary-key">${k}</span><span class="tf-summary-val${cls?' '+cls:''}">${v}</span></div>`).join('')}
-      </div>
-      <div class="tf-actions">
-        <button class="tf-btn tf-btn-primary" onclick="salvarRegistro()">Salvar ✓</button>
-        <button class="tf-btn-secondary" onclick="renderStep('tipo')">Editar</button>
-      </div>`;
+    html=`<div class="tf-question">Tudo certo?</div>
+    <div class="tf-sub">Confirme antes de salvar.</div>
+    <div class="tf-summary">
+      ${rows.map(([k,v,cls])=>`<div class="tf-summary-row"><span class="tf-summary-key">${k}</span><span class="tf-summary-val${cls?' '+cls:''}">${v}</span></div>`).join('')}
+    </div>
+    <div class="tf-actions">
+      <button class="tf-btn tf-btn-primary" onclick="salvarRegistro()">Salvar ✓</button>
+      <button class="tf-btn-secondary" onclick="renderStep('tipo')">Editar</button>
+    </div>`;
   }
-
   el.innerHTML=html;
   const inp=document.getElementById('tf-valor');
-  if(inp) setTimeout(()=>inp.focus(),100);
+  if(inp)setTimeout(()=>inp.focus(),100);
 }
 
 function tfSelect(field,val){
   tf[field]=val;
-  renderStep(getSteps()[0]==='tipo'&&field==='tipo'?'tipo':field);
-  // auto-avança em tipo e meio após selecionar
-  if(field==='tipo'||field==='meio'){
-    setTimeout(()=>tfNext(field),220);
-  }
+  renderStep(field);
+  if(field==='tipo'||field==='meio')setTimeout(()=>tfNext(field),220);
 }
-
-function tfSelectCat(id){
-  tf.categoria=tf.categoria===id?null:id;
-  renderStep('categoria');
-}
-
-function tfSelectRecorrente(val){
-  tf.recorrente=val;
-  if(!val) tf.diaVencimento=null;
-  renderStep('recorrente');
-}
-
+function tfSelectCat(id){tf.categoria=tf.categoria===id?null:id;renderStep('categoria');}
+function tfSelectRecorrente(val){tf.recorrente=val;if(!val)tf.diaVencimento=null;renderStep('recorrente');}
 function tfNext(current){
   const steps=getSteps();
   const idx=steps.indexOf(current);
   if(idx<0)return;
-  if(idx+1<steps.length) renderStep(steps[idx+1]);
+  if(idx+1<steps.length)renderStep(steps[idx+1]);
   else renderStep('confirmar');
 }
-
 function tfBack(current){
   const steps=getSteps();
   const idx=steps.indexOf(current);
-  if(idx>0) renderStep(steps[idx-1]);
+  if(idx>0)renderStep(steps[idx-1]);
 }
 
 function salvarRegistro(){
   const reg={
-    id:Date.now(),
-    tipo:tf.tipo,
-    data:tf.data,
-    valor:tf.valor||0,
-    meio:tf.meio||null,
-    categoria:tf.categoria||null,
-    recorrente:tf.recorrente||false,
-    diaVencimento:tf.diaVencimento||null,
+    id:Date.now(),tipo:tf.tipo,data:tf.data,valor:tf.valor||0,
+    meio:tf.meio||null,categoria:tf.categoria||null,
+    recorrente:tf.recorrente||false,diaVencimento:tf.diaVencimento||null,
     cicloKey:tf.meio==='credito'?cicloKey(getCiclo(new Date(tf.data+'T12:00:00'))):null,
   };
   state.registros.push(reg);
-
-  if(tf.tipo==='investimento') state.abrigo+=tf.valor||0;
-
-  // Adiciona ou atualiza fixo se recorrente
+  if(tf.tipo==='investimento')state.abrigo+=tf.valor||0;
   if(tf.tipo==='saida'&&tf.recorrente&&tf.diaVencimento){
     const catObj=CATS.find(c=>c.id===tf.categoria);
-    const existente=state.fixos.findIndex(f=>f.nome===(catObj?catObj.name:tf.categoria||'Gasto')&&f.diaVencimento===tf.diaVencimento);
+    const existente=state.fixos.findIndex(f=>f.nome===(catObj?catObj.name:'Gasto')&&f.diaVencimento===tf.diaVencimento);
     const novoFixo={id:Date.now()+1,nome:catObj?catObj.name:'Gasto',icon:catObj?catObj.icon:'📦',valor:tf.valor,meio:tf.meio,diaVencimento:tf.diaVencimento,categoria:tf.categoria};
-    if(existente>=0) state.fixos[existente]=novoFixo;
+    if(existente>=0)state.fixos[existente]=novoFixo;
     else state.fixos.push(novoFixo);
   }
-
-  save();
-  showToast('Registro salvo ✓');
-  goTo('dashboard');
+  save();showToast('Registro salvo ✓');goTo('dashboard');
 }
 
-// ── DASHBOARD ───────────────────────────────────────────────
+// DASHBOARD
 function renderDashboard(){
   const ap=Math.min((state.abrigo/ABRIGO_META)*100,100);
   document.getElementById('abrigo-current').textContent=fmt(state.abrigo);
   document.getElementById('abrigo-bar').style.width=ap+'%';
-  document.getElementById('abrigo-pct').textContent=ap>0?Math.round(ap)+'% da meta':'0% — comece com qualquer valor';
+  document.getElementById('abrigo-pct').textContent=ap>0?Math.round(ap)+'% da meta de segurança':'0% — comece com qualquer valor';
 
   const ciclo=getCiclo();
   const pp=Math.min(Math.round((ciclo.passados/ciclo.total)*100),100);
@@ -667,12 +634,24 @@ function renderDashboard(){
   document.getElementById('ciclo-progresso-bar').style.width=pp+'%';
   document.getElementById('ciclo-dias-ini').textContent=fmtD(ciclo.abertura);
 
-  // Fatura acumulada = soma de saídas no crédito no ciclo atual
   const ck=cicloKey(ciclo);
   const faturaRegs=state.registros.filter(r=>r.tipo==='saida'&&r.meio==='credito'&&r.cicloKey===ck);
   const faturaAcum=faturaRegs.reduce((a,r)=>a+r.valor,0);
   document.getElementById('ciclo-fatura-acum').textContent=faturaAcum>0?fmt(faturaAcum):'—';
-  document.getElementById('ciclo-fatura-acum').className='ciclo-val'+(faturaAcum>5000?' warn':faturaAcum>0?' ok':'');
+  document.getElementById('ciclo-fatura-acum').className='ciclo-val'+(faturaAcum>3000?' danger':faturaAcum>2000?' warn':faturaAcum>0?' ok':'');
+
+  // Meta do ciclo atual
+  const meta=getMetaCicloAtual();
+  if(meta){
+    document.getElementById('ciclo-meta-val').textContent=fmt(meta.alvo);
+    document.getElementById('ciclo-meta-val').className='ciclo-val';
+    const margem=meta.alvo-faturaAcum;
+    document.getElementById('ciclo-margem').textContent=fmt(margem);
+    document.getElementById('ciclo-margem').className='ciclo-val'+(margem<0?' danger':margem<500?' warn':' ok');
+  } else {
+    document.getElementById('ciclo-meta-val').textContent='—';
+    document.getElementById('ciclo-margem').textContent='—';
+  }
 
   const dr=ciclo.restantes;
   document.getElementById('ciclo-dias-rest').textContent=dr>=0?dr+(dr===1?' dia':' dias'):'Encerrado';
@@ -681,7 +660,9 @@ function renderDashboard(){
   if(dr<=3&&dr>=0){document.getElementById('ciclo-badge').textContent='Fechando em breve';document.getElementById('ciclo-badge').className='ciclo-badge fechando';}
   else{document.getElementById('ciclo-badge').textContent='Aberto';document.getElementById('ciclo-badge').className='ciclo-badge aberto';}
 
-  // Métricas do mês
+  // Escada de metas
+  renderEscada();
+
   const now=new Date(),mk=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
   const regsMs=state.registros.filter(r=>r.data&&r.data.startsWith(mk));
   const te=regsMs.filter(r=>r.tipo==='entrada').reduce((a,r)=>a+r.valor,0);
@@ -696,10 +677,8 @@ function renderDashboard(){
   document.getElementById('m-saldo').className='metric-value'+(sl>=0?' positive':' negative');
   document.getElementById('m-entrou-sub').textContent=te>0?`${regsMs.filter(r=>r.tipo==='entrada').length} entrada(s)`:'nenhum registro';
   document.getElementById('m-saiu-sub').textContent=ts>0?`${regsMs.filter(r=>r.tipo==='saida').length} saída(s)`:'nenhum registro';
-  document.getElementById('m-econ-sub').textContent=te>0?Math.round((tec/te)*100)+'% da renda':'meta: 20%';
-  document.getElementById('m-saldo-sub').textContent=sl>=0?'positivo':'atenção';
+  document.getElementById('m-econ-sub').textContent=te>0?Math.round((tec/te)*100)+'% da renda · meta: 20%':'meta: 20% = R$ 1.346';
 
-  // ITF
   const itf=calcITF();
   if(itf!=null){
     const lv=itfLevel(itf);
@@ -717,9 +696,33 @@ function renderDashboard(){
   renderChartFatura();
 }
 
+function renderEscada(){
+  const el=document.getElementById('escada-metas');
+  const hoje=new Date();
+  const cicloAtual=getCiclo();
+  el.innerHTML=METAS_FATURA.map(m=>{
+    const fechD=new Date(m.fechamento+'T12:00:00');
+    const isCurrent=Math.abs(fechD-cicloAtual.fechamento)<86400000*2;
+    const isPast=fechD<cicloAtual.abertura;
+    // Calcula fatura acumulada no ciclo dessa meta
+    const ckM=`${fechD.getFullYear()}-${String(fechD.getMonth()+1).padStart(2,'0')}`;
+    const fatM=state.registros.filter(r=>r.tipo==='saida'&&r.meio==='credito'&&r.cicloKey===ckM).reduce((a,r)=>a+r.valor,0);
+    const statusCls=isCurrent?'ms-atual':isPast?'ms-ok':'ms-prox';
+    const statusTxt=isCurrent?'Atual':isPast?'Encerrado':'Próximo';
+    const pct=fatM>0?Math.round((fatM/m.alvo)*100):0;
+    return`<div class="meta-row">
+      <div style="flex:1">
+        <div class="meta-ciclo">${m.label} — paga ${m.pagamento}</div>
+        <div class="meta-ciclo-sub">${m.obs}${fatM>0?' · '+fmt(fatM)+' acumulados ('+pct+'% da meta)':''}</div>
+      </div>
+      <span class="meta-status ${statusCls}">${statusTxt}</span>
+      <div class="meta-alvo" style="color:${fatM>m.alvo?'var(--danger)':'var(--text)'}">${fmt(m.alvo)}</div>
+    </div>`;
+  }).join('');
+}
+
 function renderChartFatura(){
   const el=document.getElementById('chart-fatura');
-  // Agrupa faturas por ciclo
   const map={};
   state.registros.filter(r=>r.tipo==='saida'&&r.meio==='credito').forEach(r=>{
     const ck=r.cicloKey||cicloKey(getCiclo(new Date(r.data+'T12:00:00')));
@@ -739,17 +742,13 @@ function renderChartFatura(){
   }).join('');
 }
 
-// ── ITF ─────────────────────────────────────────────────────
+// ITF
 function calcITF(){
   if(!state.registros.length)return null;
   const now=new Date();
-
-  // Frequência: registros nos últimos 28 dias
   const limite=new Date(now-28*86400000);
   const recentes=state.registros.filter(r=>new Date(r.data+'T12:00:00')>=limite);
   const freqPts=recentes.length>=4?100:recentes.length===3?75:recentes.length===2?40:recentes.length===1?15:0;
-
-  // Tendência fatura: últimos 2 ciclos
   let fatPts=65;
   const cicloPrev=getCiclo(new Date(now.getFullYear(),now.getMonth()-1,20));
   const cicloAtual=getCiclo();
@@ -757,21 +756,15 @@ function calcITF(){
   const fatAtual=state.registros.filter(r=>r.tipo==='saida'&&r.meio==='credito'&&r.cicloKey===ckAtual).reduce((a,r)=>a+r.valor,0);
   const fatPrev=state.registros.filter(r=>r.tipo==='saida'&&r.meio==='credito'&&r.cicloKey===ckPrev).reduce((a,r)=>a+r.valor,0);
   if(fatPrev>0){const d=(fatAtual-fatPrev)/fatPrev;fatPts=d<=-0.1?100:d<=0.1?65:d<=0.25?35:10;}
-
-  // Sentimento: não implementado neste fluxo → neutro 50
   const sentPts=50;
-
-  // Poupança do mês
   const mk=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
   const entradaMes=state.registros.filter(r=>r.tipo==='entrada'&&r.data.startsWith(mk)).reduce((a,r)=>a+r.valor,0);
   const poupMes=state.registros.filter(r=>r.tipo==='investimento'&&r.data.startsWith(mk)).reduce((a,r)=>a+r.valor,0);
   const pp=entradaMes>0?(poupMes/entradaMes)*100:0;
   const pouPts=pp>=20?100:pp>=15?80:pp>=10?60:pp>=5?35:pp>0?15:0;
-
   const abrigoPts=Math.min((state.abrigo/ABRIGO_META)*100,100);
   return Math.round(freqPts*.30+fatPts*.25+sentPts*.20+pouPts*.15+abrigoPts*.10);
 }
-
 function itfLevel(s){
   if(s>=70)return{label:'Tranquilidade',color:'#3a7a5c'};
   if(s>=40)return{label:'Construindo',color:'#b07d2a'};
@@ -782,11 +775,18 @@ function gerarAnalise(){
   if(!state.registros.length)return{icon:'🌱',text:'Bem-vinda ao seu abrigo. Faça seu primeiro registro para começar.'};
   const now=new Date();
   const mk=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
-  const cicloPrev=getCiclo(new Date(now.getFullYear(),now.getMonth()-1,20));
   const cicloAtual=getCiclo();
+  const cicloPrev=getCiclo(new Date(now.getFullYear(),now.getMonth()-1,20));
   const ckAtual=cicloKey(cicloAtual),ckPrev=cicloKey(cicloPrev);
   const fatAtual=state.registros.filter(r=>r.tipo==='saida'&&r.meio==='credito'&&r.cicloKey===ckAtual).reduce((a,r)=>a+r.valor,0);
   const fatPrev=state.registros.filter(r=>r.tipo==='saida'&&r.meio==='credito'&&r.cicloKey===ckPrev).reduce((a,r)=>a+r.valor,0);
+  const meta=getMetaCicloAtual();
+  if(meta&&fatAtual>0){
+    const margem=meta.alvo-fatAtual;
+    const dr=cicloAtual.restantes;
+    if(margem<0)return{icon:'👀',text:`A fatura já passou da meta de ${fmt(meta.alvo)} deste ciclo. Vale observar os próximos gastos antes do fechamento dia ${cicloAtual.fechamento.getDate()}.`};
+    if(margem<300&&dr<=7)return{icon:'⚡',text:`Faltam ${fmt(margem)} para a meta de ${fmt(meta.alvo)} e o ciclo fecha em ${dr} dias. Você está bem perto.`};
+  }
   if(fatPrev>0&&fatAtual>0){
     const d=((fatAtual-fatPrev)/fatPrev)*100;
     if(d<=-8)return{icon:'📉',text:`Sua fatura reduziu ${Math.abs(Math.round(d))}% em relação ao ciclo anterior. Excelente sinal.`};
@@ -796,7 +796,7 @@ function gerarAnalise(){
   const poupMes=state.registros.filter(r=>r.tipo==='investimento'&&r.data.startsWith(mk)).reduce((a,r)=>a+r.valor,0);
   if(entradaMes>0){
     const pp=(poupMes/entradaMes)*100;
-    if(pp>=20)return{icon:'🎯',text:`Você atingiu sua meta de 20% este mês — ${fmt(poupMes)} guardados. Consistência real.`};
+    if(pp>=20)return{icon:'🎯',text:`Você atingiu sua meta de 20% este mês — ${fmt(poupMes)} guardados. Isso é consistência real.`};
     if(pp>=10)return{icon:'📈',text:`Você poupou ${Math.round(pp)}% da renda este mês. Na direção certa.`};
   }
   const ap=(state.abrigo/ABRIGO_META)*100;
@@ -805,14 +805,12 @@ function gerarAnalise(){
   return{icon:'✨',text:'Continue registrando — a consistência é o que transforma o controle financeiro.'};
 }
 
-// ── PROJEÇÃO ─────────────────────────────────────────────────
-function salvarRendaRef(v){state.rendaRef=parseFloat(v)||0;save();renderProjecao();}
-
+// PROJEÇÃO
 function removerFixo(id){state.fixos=state.fixos.filter(f=>f.id!==id);save();renderFixos();renderProjCiclos();}
 
 function renderFixos(){
   const el=document.getElementById('fixos-lista');
-  if(!state.fixos.length){el.innerHTML='<div class="empty" style="padding:10px 0"><div class="empty-text" style="font-size:12px">Nenhum fixo ainda. Marque "é recorrente" ao registrar uma despesa.</div></div>';document.getElementById('total-fixos').textContent='R$ 0';return;}
+  if(!state.fixos.length){el.innerHTML='<div class="empty" style="padding:10px 0"><div class="empty-text" style="font-size:12px">Nenhum fixo cadastrado.</div></div>';document.getElementById('total-fixos').textContent='R$ 0';return;}
   const total=state.fixos.reduce((a,f)=>a+f.valor,0);
   document.getElementById('total-fixos').textContent=fmt(total);
   el.innerHTML=state.fixos.map(f=>`
@@ -820,7 +818,7 @@ function renderFixos(){
       <span class="fixo-icon-wrap">${f.icon}</span>
       <div class="fixo-info">
         <div class="fixo-nome">${f.nome}</div>
-        <div class="fixo-meta">${fmt(f.valor)}/mês · dia ${f.diaVencimento} · ${f.meio==='credito'?'💳 crédito':'🏦 débito'}</div>
+        <div class="fixo-meta">${fmt(f.valor)}/mês${f.diaVencimento?' · dia '+f.diaVencimento:''}${f.meio?' · '+(f.meio==='credito'?'💳 crédito':'🏦 débito/pix'):''}</div>
       </div>
       <button class="fixo-del" onclick="removerFixo(${f.id})">✕</button>
     </div>`).join('');
@@ -841,11 +839,10 @@ function renderProjCiclos(){
   const ciclos=proximosCiclos(3);
   const mediaFatura=mediaFaturaUltimosCiclos();
   const totalFixos=state.fixos.reduce((a,f)=>a+f.valor,0);
-  const renda=state.rendaRef||0;
-  const metaPoupanca=renda*0.2;
+  const renda=RENDA_TOTAL;
+  const metaPoupanca=META_POUPANCA;
   const el=document.getElementById('proj-ciclos');
   const ajEl=document.getElementById('ajuste-faturas');
-
   el.innerHTML=ciclos.map((c,i)=>{
     const ck=cicloKey(c);
     const fatBase=mediaFatura||0;
@@ -855,36 +852,37 @@ function renderProjCiclos(){
     const sobraPos=sobra-metaPoupanca;
     const poupViavel=sobra>=metaPoupanca;
     let badge='';
-    if(!renda)badge=`<span class="badge-warn">Defina a renda</span>`;
-    else if(poupViavel)badge=`<span class="badge-ok">20% viável ✓</span>`;
+    if(poupViavel)badge=`<span class="badge-ok">20% viável ✓</span>`;
     else if(sobra>0)badge=`<span class="badge-warn">${Math.round((sobra/renda)*100)}% possível</span>`;
     else badge=`<span class="badge-no">Saldo negativo</span>`;
+    // Verifica se tem meta da escada para esse ciclo
+    const fechStr=c.fechamento.toISOString().split('T')[0];
+    const metaEscada=METAS_FATURA.find(m=>m.fechamento===fechStr);
     return`<div class="proj-mes">
       <div class="proj-mes-header" onclick="toggleProjMes(${i})">
         <div>
           <div class="proj-mes-titulo">${i===0?'Ciclo atual':'Ciclo'} — fecha ${fmtD(c.fechamento)}</div>
-          <div class="proj-mes-sub">${fmtD(c.abertura)} → ${fmtD(c.fechamento)} · paga ${fmtD(c.pagamento)}</div>
+          <div class="proj-mes-sub">${fmtD(c.abertura)} → ${fmtD(c.fechamento)} · paga ${fmtD(c.pagamento)}${metaEscada?' · meta: '+fmt(metaEscada.alvo):''}</div>
         </div>
         <div>
-          <div class="proj-mes-saldo-val" style="color:${sobraPos>=0?'var(--success)':sobraPos>-500?'var(--warn)':'var(--danger)'}">${renda?fmt(sobraPos):'—'}</div>
+          <div class="proj-mes-saldo-val" style="color:${sobraPos>=0?'var(--success)':sobraPos>-500?'var(--warn)':'var(--danger)'}">${fmt(sobraPos)}</div>
           <div class="proj-mes-saldo-label">sobra após 20%</div>
         </div>
       </div>
       <div class="proj-mes-body${i===0?' open':''}" id="proj-body-${i}">
-        <div class="proj-row"><span class="proj-row-label">Renda esperada</span><span class="proj-row-val pos">${renda?fmt(renda):'Não definida'}</span></div>
+        <div class="proj-row"><span class="proj-row-label">Renda total</span><span class="proj-row-val pos">${fmt(renda)}</span></div>
         <div class="proj-row"><span class="proj-row-label">Fatura estimada${mediaFatura&&state.ajustesFatura[ck]==null?' (média)':' (ajustada)'}</span><span class="proj-row-val neg">${fmt(fatAjust)}</span></div>
         <div class="proj-row"><span class="proj-row-label">Gastos fixos</span><span class="proj-row-val neg">${fmt(totalFixos)}</span></div>
         <div class="proj-row" style="border-bottom:1.5px solid var(--border-mid)"><span class="proj-row-label" style="font-weight:600">Total saídas</span><span class="proj-row-val neg" style="font-size:15px">${fmt(totalSaidas)}</span></div>
-        <div class="proj-row"><span class="proj-row-label">Sobra bruta</span><span class="proj-row-val ${sobra>=0?'pos':'neg'}">${renda?fmt(sobra):'—'}</span></div>
-        <div class="proj-row"><span class="proj-row-label">Meta poupança (20%)</span><span class="proj-row-val">${renda?fmt(metaPoupanca):'—'}</span></div>
-        <div class="proj-row" style="border-top:1.5px solid var(--border-mid)"><span class="proj-row-label" style="font-weight:600">Sobra após poupança</span><span class="proj-row-val ${sobraPos>=0?'pos':'warn'}" style="font-size:15px">${renda?fmt(sobraPos):'—'}</span></div>
-        ${renda?`<div style="margin-top:8px"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;color:var(--text-2)">Meta de 20%</span>${badge}</div>
+        <div class="proj-row"><span class="proj-row-label">Sobra bruta</span><span class="proj-row-val ${sobra>=0?'pos':'neg'}">${fmt(sobra)}</span></div>
+        <div class="proj-row"><span class="proj-row-label">Meta poupança (20%)</span><span class="proj-row-val">${fmt(metaPoupanca)}</span></div>
+        <div class="proj-row" style="border-top:1.5px solid var(--border-mid)"><span class="proj-row-label" style="font-weight:600">Sobra após poupança</span><span class="proj-row-val ${sobraPos>=0?'pos':'warn'}" style="font-size:15px">${fmt(sobraPos)}</span></div>
+        <div style="margin-top:8px"><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:11px;color:var(--text-2)">Meta de 20% (R$ ${metaPoupanca.toLocaleString('pt-BR')})</span>${badge}</div>
         <div class="proj-poupanca-bg"><div class="proj-poupanca-fill" style="width:${Math.min(poupViavel?100:sobra>0?Math.round((sobra/metaPoupanca)*100):0,100)}%;background:${poupViavel?'var(--success)':'var(--warn)'}"></div></div>
-        <div class="proj-poupanca-label"><span>0%</span><span>20% = ${fmt(metaPoupanca)}</span></div></div>`:''}
+        <div class="proj-poupanca-label"><span>0%</span><span>20% = ${fmt(metaPoupanca)}</span></div></div>
       </div>
     </div>`;
   }).join('');
-
   ajEl.innerHTML=ciclos.map(c=>{
     const ck=cicloKey(c);
     const base=mediaFatura||0;
@@ -906,15 +904,10 @@ function ajustarFatura(ck,v){
 function toggleProjMes(i){document.getElementById('proj-body-'+i).classList.toggle('open');}
 
 function renderProjecao(){
-  document.getElementById('proj-renda-ref').value=state.rendaRef||'';
-  const renda=state.rendaRef;
-  document.getElementById('renda-ref-box').innerHTML=renda
-    ?`Usando <strong>${fmt(renda)}/mês</strong> · Meta de poupança: <strong>${fmt(renda*0.2)}</strong>`
-    :'Defina sua renda mensal para calcular a projeção.';
   renderFixos();renderProjCiclos();
 }
 
-// ── HISTÓRICO ────────────────────────────────────────────────
+// HISTÓRICO
 function renderHistorico(){
   const el=document.getElementById('historico-list');
   if(!state.registros.length){el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">Nenhum registro ainda.</div></div>';return;}
